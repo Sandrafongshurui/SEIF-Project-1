@@ -17,7 +17,7 @@ const options = {
 	}
 };
 
-fetch('https://fit-life-food.p.rapidapi.com/fruits', options)
+fetch('https://fit-life-food.p.rapidapi.com/food', options)
 	.then(response => response.json())
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
