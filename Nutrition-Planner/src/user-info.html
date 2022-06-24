@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="main">
+        <div id="user-info-page">
+            <form>
+                <label for="user-info-gender">Gender:</label>
+                <div id="user-info-gender">
+                    <label for="male-value">Male</label>
+                    <input id="male-value" type="radio" value="male">
+                    <label for="female-value">Female</label>
+                    <input id="female-value" type="radio" value="female">
+                </div>
+
+                <label for="age-value">Age:</label><br>
+                <input id="age-value" type="number"><br>
+
+                <label for="weight-value">Weight:</label><br>
+                <input id="weight-value" type="number"><br>
+
+                <label for="daily-activity">Select the statement that decribes you best:</label>
+                <div id="daily-activity">
+                    <button type="button" id="option-1" class="btn">i am Seated most of the time</button>
+                    <button type="button" id="option-2" class="btn">i stand around most of the time</button>
+                    <button type="button" id="option-3" class="btn">i Move around 50% most of the time</button>
+                    <button type="button" id="option-4" class="btn">i Move around 100% most of the time</button>
+                </div>
+
+                <label for="exercise-freq">Select the option that best describes your weeky exercise frequency</label>
+                <div id="exercise-freq">
+                    <button type="button" id="option-1" class="btn">little/no excercise</button>
+                    <button type="button" id="option-2" class="btn">moderate excercise 2-3 days</button>
+                    <button type="button" id="option-3" class="btn">moderate excercise 4-5 days</button>
+                    <button type="button" id="option-4" class="btn">Intense excercise 4-5</button>
+                </div>
+
+            </form>
+            <button id="btn-calculate">Calculate</button>
+        </div>
+    </div>
+    <script type=module src="./user-info.js"></script>
+</body>
+
+</html>
