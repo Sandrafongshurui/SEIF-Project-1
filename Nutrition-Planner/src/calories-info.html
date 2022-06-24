@@ -14,11 +14,72 @@
 <body>
     <label for="calories-required">Calories Required:</label>
     <div id="calories-required">
-        <button type= "button" class="btn" id="goal-calories">2000</button>
-        <button type= "button" class="btn" id="maintenence-calories">2000</button>
+        <button type="button" class="btn" id="btn-goal-calories">2000</button>
+        <button type="button" class="btn" id="btn-maintenence-calories">2000</button>
     </div>
+    <div class="container">
+        <div class="row" id="nutrient-table">
+            <div class="col">
+                Nutrientional Guide
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">Calories</div>
+            <div class="col-3">Carbs</div>
+            <div class="col-3">Protein</div>
+            <div class="col-3">Fats</div>
+        </div>
+
+        <div class="row" >
+            <div class="row">
+                <div class="col-3" id="calories-num">
+                    2000cal
+                </div>
+                <div class="col-9" >
+                    <div class="row" id="nutrient-table-percentage">
+                        <div class="col-4" id="carbs-in-per">Carbs</div>
+                        <div class="col-4" id="prot-in-per">Protein</div>
+                        <div class="col-4" id="fats-in-per">Fats</div>
+                    </div>
+                    <div class="row" id="nutrient-table-cal">
+                        <div class="col-4" id="carbs-in-cal">Carbs</div>
+                        <div class="col-4" id="prot-in-cal">Protein</div>
+                        <div class="col-4" id="fats-in-cal">Fats</div>
+                    </div>
+                    <div class="row" id="nutrient-table-grams">
+                        <div class="col-4" id="carbs-in-gram">Carbs</div>
+                        <div class="col-4" id="carbs-in-gram">Protein</div>
+                        <div class="col-4" id="carbs-in-gram">Fats</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="row row-cols-4">
+                <div class="col">Calories</div>
+                <div class="col">Carbs</div>
+                <div class="col">Protein</div>
+                <div class="col">Fats</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="row row-cols-4">
+                <div>
+                </div>
+                <div class="col">2500</div>
+                <div class="col">Value</div>
+                <div class="col">Value</div>
+                <div class="col">Value</div>
+            </div>
+        </div>
+    </div> -->
     <button id="btn-get-recipes">Get Recipes</button>
-    <script type = module src="./calories-info.js"></script>
+    <script type=module src="./calories-info.js"></script>
 </body>
 
 </html>

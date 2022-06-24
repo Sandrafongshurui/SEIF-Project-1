@@ -1,37 +1,17 @@
 import newUserLocalStorage from "./JavaScript Files/main.js"
+import { CalculatedNutrients } from "./JavaScript Files/main.js"
+const newCalculatedNutrients = new CalculatedNutrients()
 console.log("this is the calories-info.js")
-const calorieStandardPercentage = {
 
-    "weight-loss": {
-        "carbs": 40,
-        "protein": 30,
-        "fats": 30
-    },
-    
-
-    "muscle-gain": {
-        "carbs": 40,
-        "protein": 40,
-        "fats": 20
-    },
-    
-
-    "tone-up": {
-        "carbs": 25,
-        "protein": 50,
-        "fats": 25
-    }
-
-}
 
 function addEventListeners() {
     const caloriesRequiredOptions = document.getElementById("calories-required")
-    let selectedCalories = ""
+    let selectedCaloriesId = ""
     document.getElementById("calories-required").addEventListener('click', (event) => {
         if (event.target.type === "button") {
             selectedCaloriesId = event.target.id
-            console.log(selectedCalories)
-            if (selectedCaloriesId === "goal-calories") {
+            console.log(selectedCaloriesId)
+            if (selectedCaloriesId === "btn-goal-calories") {
                 console.log("show goal calories info")
                 //input the info in the table
                 //display table
@@ -58,22 +38,16 @@ function addEventListeners() {
     })
 
 }
-function calculateNutrients(goal, caloriesNum) {
-    //get the value of the "key" , whihc is the strng of goal
-    console.log(calorieStandardPercentage[goal])
-
-}
-
-
-function inputValuesInTable() {
-    console.log("input value into table")
-}
 
 function init() {
     //check if there storage
     console.log("init")
     addEventListeners()
-    calculateNutrients("weight-loss", 2500)
+    newCalculatedNutrients.goal = "weight-loss"
+    console.log(newCalculatedNutrients.goal)
+    newCalculatedNutrients.calculateNutrients()
+    const defaultSelected = document.getElementById("btn-goal-calories")
+    defaultSelected.className += " active"
     // if (newUserLocalStorage.hasStorage("calories-info")) {
     //     inputValuesInTable()
     //     //fillWithLocal()
