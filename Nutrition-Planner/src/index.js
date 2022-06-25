@@ -1,72 +1,55 @@
 //this is importing the things inside  main.js
 //able to do it cos type is module in the linked html file. no module will hv error
-//import "something" can be any name, basically is like a paremeter that will import the default class
-
-//import Test from "./JavaScript Files/main.js";
-import newUserLocalStorage from "./JavaScript Files/main.js"
-//import userInfo from "./JavaScript Files/main.js"
-// class UserInfo {
-//     constructor() {
-//         this.goal = ""
-//     }
-//     //store local data function()
-//     // storeInLocal(value) {
-//     //     console.log("stroe info in local storage")
-//     //     window.localStorage.setItem("goal", JSON.stringify(value))
-//     //     console.log(localStorage);
-//     //     //check if there storage
-//     //     if (pages.hasStorage("userInfo")) {
-//     //         //load the data   
-//     //         pages.loadData("userInfo")        
-//     //     }        
-//     //     pages.goToPage("./user-info.html")
-//     // }
-// }
 
 
-// const pages = {
-//     //pageData wiil be the name of the page's storage, goal, userinfo, calories values, suggestions
-//     //it will be a key
-//     hasStorage: function (pageData) {
-//         return window.localStorage.getItem(pageData)
-//     },
-//     goToPage: function (link) {
-//         console.log("go to page")
-//         window.location.href = link;
-//         // setTimeout(function() {
-//         //     window.location.href = link;
-//         // }, 10);
-//     },
-//     loadData: function(pageData){
-//         console.log("load data")
-//         //window.localStorage.setItem("pageData", JSON.stringify(value))
-//     }
-// }
-
+import newUserProfile from "./JavaScript Files/main.js"
 
 console.log("this is the index.js")
 
 function addEventListeners() {
     document.getElementById("goal-weight-loss").addEventListener('click', () => {
-        newUserLocalStorage.storeValue( "goal","weight-loss")
-        newUserLocalStorage.goToPage("./user-info.html")
+        newUserProfile.storeValue("goal", "weight-loss", true)
+        newUserProfile.goToPage("./user-info.html")
     })
     document.getElementById("goal-muscle-gain").addEventListener('click', () => {
-        newUserLocalStorage.storeValue( "goal","muscle-gain")
-        newUserLocalStorage.goToPage("./user-info.html")
+        newUserProfile.storeValue("goal", "muscle-gain", true)
+        newUserProfile.goToPage("./user-info.html")
     })
     document.getElementById("goal-tone-up").addEventListener('click', () => {
-        newUserLocalStorage.storeValue("goal","tone-up")
-        newUserLocalStorage.goToPage("./user-info.html")
+        newUserProfile.storeValue("goal", "tone-up", true)
+        newUserProfile.goToPage("./user-info.html")
     })
+}
+function updateDom(goal) {
+    //make goal option active,
+    //const goalOptions = document.getElementById("indicated-goal")
+    //returns an array of buttons in the indicated-goal
+    const option = document.getElementsByClassName("btn")
+    for (const child of option) {
+        if (child.id === `goal-${goal}`) {
+            child.className += " active"
+            break
+        }
+    }
 }
 
 function init() {
     console.log('init');
-    //delete it later
+    addEventListeners()
     console.log(localStorage)
+    //everything it goes index page again, it restarts
     localStorage.clear()
     console.log(localStorage)
-    addEventListeners();
+    //check if goal local storage is present
+    //if have, get the data
+    if (newUserProfile.hasStorage("goal")) {
+        const storedGoal = newUserProfile.getData("goal")
+        //store in the newUserProfile, no need to store in local storage agian, so false
+        newUserProfile.storeValue("goal", storedGoal, false)
+        updateDom(storedGoal)
+        return
+    }
+    //Brand new user, so clear any data
+  
 }
 init()

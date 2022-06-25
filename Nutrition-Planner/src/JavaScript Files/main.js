@@ -10,33 +10,38 @@
 const userInfoTemplate = {
     "gender": "",
     "age": "",
+    "height": "",
     "weight": "",
     "dailyactivity": "",
     "exercisefreq": ""
 }
 const measureType = {
-    "percentage" : "",
-    "cal" : "",
-    "grams" : ""
+    "percentage": "",
+    "cal": "",
+    "grams": ""
 }
-const caloriesInfoTemplate = {
+const totalCaloriesInfoTemplate = {
     "hasCalculated": false,
     "calories": "",
-    "carbs": {...measureType},
-    "protein": {...measureType},
-    "fats": {...measureType},
+    "carbs": { ...measureType },
+    "protein": { ...measureType },
+    "fats": { ...measureType },
 }
 
-class UserLocalStorage {
+class UserProfile {
     constructor() {
-        this.goal = ""
+        this.goal = "weight-loss"
         this.userInfo = { ...userInfoTemplate }
-        this.caloriesInfo = { ...caloriesInfoTemplate }
+        this.totalCaloriesInfo = {
+            "goalCaloriesInfo": { ...totalCaloriesInfoTemplate },
+            "maintainenceCaloriesInfo": { ...totalCaloriesInfoTemplate }
+        }
     }
     //store in the this class
-    storeValue(pageData, value) {
-        console.log(value)
-        this.storeInLocal(pageData, value)
+    storeValue(pageData, value, storeInLocalStorage) {
+        if(storeInLocalStorage){
+            this.storeInLocal(pageData, value)
+        }
         if (pageData === "goal") {
             this.goal = value
             return
@@ -46,9 +51,38 @@ class UserLocalStorage {
             return
         }
         if (pageData === "calories-info") {
-            this.caloriesInfo = value
+            this.totalCaloriesInfo = value
             return
         }
+        
+    }
+
+    calculateMaintainenceCalories() {
+        // Formula used to calculate men’s calorie needs is:
+        // 66.5 + 13.8 x(body weight in kilograms) + 5 x(body height in cm) divided by 6.8 x age.
+        //women = 655.1 + 9.6 x(body weight in kilograms) + 1.9 x(body height in cm) divided by 4.7 x age.
+        //Result of the equation must be multiplied with your physical activity factor.
+        //low physical activity, then multiply by 1.2,average physical activity then multiply by 1.3,  heavy physical activities, multiply by 1.4.
+        console.log(this.totalCaloriesInfo)
+        this.totalCaloriesInfo.maintainenceCaloriesInfo.calories = 2000
+        return 2000
+        
+        //this.totalCaloriesInfo.calories = 2500
+    }
+    calculateGoalCalories() {
+        //weight loss, use the maintainence calories -500cal (ideal number base on online research)
+        //future can be a parameter to change according to  "ideal weight' feature
+        if (this.goal === "weight-loss") {
+            this.totalCaloriesInfo.goalCaloriesInfo.calories = this.totalCaloriesInfo.maintainenceCaloriesInfo.calories - 500
+            return this.totalCaloriesInfo.goalCaloriesInfo.calories
+        }
+        //muscle-gain, use the maintainence calories +500cal 
+        if (this.goal === "muscle-gain") {
+            this.totalCaloriesInfo.goalCaloriesInfo.calories = this.totalCaloriesInfo.maintainenceCaloriesInfo.calories + 500
+            return this.totalCaloriesInfo.goalCaloriesInfo.calories 
+        }
+        //tone-up, 
+
     }
     //store in local storage
     storeInLocal(pageData, value) {
@@ -83,7 +117,7 @@ class UserLocalStorage {
 
     }
 }
-const nutrientsInfo = {
+const nutrientsEquationNums = {
 
     "weight-loss": {
         "carbs": 40,
@@ -100,7 +134,7 @@ const nutrientsInfo = {
         "protein": 50,
         "fats": 25
     },
-    "maintenece": {
+    "maintainence": {
         "carbs": 40,
         "protein": 30,
         "fats": 30
@@ -108,31 +142,35 @@ const nutrientsInfo = {
 }
 
 class CalculatedNutrients {
-    constructor() {
-        this.goal = ""
-        this.caloriesNum = ""
-        this.carbsInCal = ""
-        this.protInCal = ""
-        this.fatsInCal = ""
-        this.carbInGrams = ""
-        this.protInGrams = ""
-        this.fatsInGrams = ""
-        this.nutrientsInfo = {...nutrientsInfo}
-        this.goalNutrientsInfo = {}
+    constructor(goal) {
+        this.goal = goal
+        // this.totalCaloriesInfo.calories = ""
+        // this.carbsInCal = ""
+        // this.protInCal = ""
+        // this.fatsInCal = ""
+        // this.carbInGrams = ""
+        // this.protInGrams = ""
+        // this.fatsInGrams = ""
+        this.totalCaloriesInfo = { ...totalCaloriesInfoTemplate },
+        this.nutrientsEquationNums = { ...nutrientsEquationNums }
+        // this.nutrientsEquationNums = {}
     }
-    calculateCalories(){
-        this.caloriesNum = 2500
-    }
+
     calculateNutrients() {
         //get the nutrients of the specific goal from nutrients info
-        console.log(this.nutrientsInfo[this.goal])
-        this.goalNutrientsInfo= this.nutrientsInfo[this.goal]
+        console.log(this.goal,   this.totalCaloriesInfo.calories)
         //calculate the given percentage of the total calories for each nutrient in calories
-        this.carbsInCal = this.percentage(this.caloriesNum, this.goalNutrientsInfo.carbs)
-        this.protInCal = this.percentage(this.caloriesNum, this.goalNutrientsInfo.protein)
-        this.fatsInCal = this.percentage(this.caloriesNum, this.goalNutrientsInfo.fats)
+        // this.carbsInCal = this.percentage(this.totalCaloriesInfo.calories, this.nutrientsEquationNums[this.goal].carbs)
+        // this.protInCal = this.percentage(this.totalCaloriesInfo.calories, this.nutrientsEquationNums[this.goal].protein)
+        // this.fatsInCal = this.percentage(this.totalCaloriesInfo.calories, this.nutrientsEquationNums[this.goal].fats)
+        //store here also, so that easier to store in local storage later
+        this.totalCaloriesInfo.carbs.cal = this.percentage(this.totalCaloriesInfo.calories, this.nutrientsEquationNums[this.goal].carbs)
+        this.totalCaloriesInfo.protein.cal = this.percentage(this.totalCaloriesInfo.calories, this.nutrientsEquationNums[this.goal].protein)
+        this.totalCaloriesInfo.fats.cal = this.percentage(this.totalCaloriesInfo.calories, this.nutrientsEquationNums[this.goal].fats)
         //calculate the given percentage of the total calories for each nutrient in grams, 
         //one calorie is equal to 0.129598 grams
+        
+
         this.inputValuesInTable()
     }
     percentage(num, per) {
@@ -140,15 +178,17 @@ class CalculatedNutrients {
     }
     inputValuesInTable() {
         console.log("input value into table")
+        console.log(this.totalCaloriesInfo.carbs.cal)
         //input the values into the table
         //can i put in this a for loop?
-        document.getElementById("calories-num").innerText = this.caloriesNum
-        document.getElementById("carbs-in-per").innerText = this.goalNutrientsInfo.carbs
-        document.getElementById("prot-in-per").innerText = this.goalNutrientsInfo.protein
-        document.getElementById("fats-in-per").innerText = this.goalNutrientsInfo.fats
-        document.getElementById("carbs-in-cal").innerText = this.carbsInCal
-        document.getElementById("prot-in-cal").innerText = this.protInCal
-        document.getElementById("fats-in-cal").innerText = this.fatsInCal
+        const nutrientsEquationNums = this.nutrientsEquationNums[this.goal]
+        document.getElementById("calories-num").innerText = this.totalCaloriesInfo.calories
+        document.getElementById("carbs-in-per").innerText = nutrientsEquationNums.carbs
+        document.getElementById("prot-in-per").innerText = nutrientsEquationNums.protein
+        document.getElementById("fats-in-per").innerText = nutrientsEquationNums.fats
+        document.getElementById("carbs-in-cal").innerText =  this.totalCaloriesInfo.carbs.cal
+        document.getElementById("prot-in-cal").innerText = this.totalCaloriesInfo.protein.cal
+        document.getElementById("fats-in-cal").innerText = this.totalCaloriesInfo.fats.cal 
         // document.getElementById("carbs-in-gram").innerText =  carbInGram
         // document.getElementById("prot-in-gram").innerText =  protInGram
         // document.getElementById("fats-in-gram").innerText =  fatsInGram
@@ -156,14 +196,9 @@ class CalculatedNutrients {
 
 }
 
-const newUserLocalStorage = new UserLocalStorage()
-//const newCalculatedNutrients = new CalculatedNutrients()
-// function storeValue(value) {
-//     console.log(value)
-//     newUserInfo.goal = value
-//     newUserInfo.storeInLocal(newUserInfo.goal)
-// }
+//create newUserProfile which will contain information that is needed fo the other JS files
+const newUserProfile = new UserProfile()
 
 //exports pages objects as the default meaning, while importing this main.js we can use any name 
-export { newUserLocalStorage as default }
-export {CalculatedNutrients}
+export { newUserProfile as default }
+export { CalculatedNutrients }

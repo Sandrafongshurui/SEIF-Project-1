@@ -13,3 +13,11 @@ daily-activity.btn {
     color: white;
   }
 
+  .recipe-item{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    border: black solid;
+    padding: 0;
+  }
+

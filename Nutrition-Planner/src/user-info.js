@@ -1,5 +1,5 @@
 
-import newUserLocalStorage from "./JavaScript Files/main.js"
+import newUserProfile from "./JavaScript Files/main.js"
 //console.log("this is the user-info.js")
 
 function addEventListeners() {
@@ -53,7 +53,8 @@ function addEventListeners() {
 
     document.getElementById("btn-calculate").addEventListener('click', () => {
         //validate()       
-        newUserLocalStorage.storeValue("user-info", getUserInputs(dailyActivity, exerciseFreq))
+        newUserProfile.storeValue("user-info", getUserInputs(dailyActivity, exerciseFreq), true)
+        newUserProfile.goToPage("./calories-info.html")
     })
 
 
@@ -61,36 +62,37 @@ function addEventListeners() {
 function getUserInputs(selectedDailyActivity, selectedExerciseFreq) {
     //see which gender is checked
     if (document.getElementById("male-value").checked) {
-        newUserLocalStorage.userInfo.gender = "male"
+        newUserProfile.userInfo.gender = "male"
     } else {
-        newUserLocalStorage.userInfo.gender = "female"
+        newUserProfile.userInfo.gender = "female"
     }
-    newUserLocalStorage.userInfo.age = document.getElementById("age-value").value
-    newUserLocalStorage.userInfo.weight = document.getElementById("weight-value").value
-    newUserLocalStorage.userInfo.dailyactivity = selectedDailyActivity
-    newUserLocalStorage.userInfo.exercisefreq = selectedExerciseFreq
-    return newUserLocalStorage.userInfo
+    newUserProfile.userInfo.age = document.getElementById("age-value").value
+    newUserProfile.userInfo.height = document.getElementById("height-value").value
+    newUserProfile.userInfo.weight = document.getElementById("weight-value").value
+    newUserProfile.userInfo.dailyactivity = selectedDailyActivity
+    newUserProfile.userInfo.exercisefreq = selectedExerciseFreq
+    return newUserProfile.userInfo
 }
-function fillWithLocal() {
+function updateDom(userInfo) {
     //get and load the data   
     console.log("this page has data")
-    const userInfoData = newUserLocalStorage.getData("user-info")
-    console.log(userInfoData)
+    //const userInfo = newUserProfile.getData("user-info")
+    console.log(userInfo)
     //checked the gender
-    if (newUserLocalStorage.userInfo.gender = "male") {
+    if (newUserProfile.userInfo.gender = "male") {
         document.getElementById("male-value").checked = true
     } else {
         document.getElementById("female-value").checked = true
     }
-    document.getElementById("age-value").value = userInfoData.age
-    document.getElementById("weight-value").value = userInfoData.weight
-
+    document.getElementById("age-value").value = userInfo.age
+    document.getElementById("weight-value").value = userInfo.weight
+    document.getElementById("height-value").value = userInfo.height
     //make the daily-activity option active,
     const dailyActivityOptions = document.getElementById("daily-activity")
     //returns an array of buttons in the dail-activity div
     const option = dailyActivityOptions.getElementsByClassName("btn")
     for (const child of option) {
-        if (child.id === userInfoData.dailyactivity) {
+        if (child.id === userInfo.dailyactivity) {
             child.className += " active"
             break
         }
@@ -100,24 +102,53 @@ function fillWithLocal() {
     //returns an array of buttons in the dail-activity div
     const btns = exerciseFreqOptions.getElementsByClassName("btn")
     for (const child of btns) {
-        if (child.id === userInfoData.exercisefreq) {
+        if (child.id === userInfo.exercisefreq) {
             child.className += " active"
-            bresk
+            break
         }
     }
+
+
+}
+
+function updateHeaderDom(storedGoal){
+    document.getElementById("indicated-goal-header").innerText = storedGoal
 }
 
 function init() {
     //console.log(localStorage)
     //console.log('init');
-
     addEventListeners();
-    //check if there storage
-    if (newUserLocalStorage.hasStorage("user-info")) {
-        fillWithLocal()
+
+    //check if user-info local storage is present
+    //if have, get the data
+    if (newUserProfile.hasStorage("user-info")) {
+        const storedUserInfo = newUserProfile.getData("user-info")
+        //store in the newUserProfile, no need to store in local storage agian, so false
+        newUserProfile.storeValue("user-info", storedUserInfo, false)
+        //update the header to the goal
+        updateHeaderDom(newUserProfile.goal)
+        //update the inputs to the stored userinfo
+        updateDom(storedUserInfo)
+        return
     }
-    else {
-        console.log("this page has no data")
+
+    //check if goal local storage is present
+    //if have, get the data
+    if (newUserProfile.hasStorage("goal")) {
+        const storedGoal= newUserProfile.getData("goal")
+        console.log(localStorage)
+        //store in the newUserProfile, no need to store in local storage agian, so false
+        newUserProfile.storeValue("goal", storedGoal, false)
+        console.log(newUserProfile.goal)
+        //update the header with local storage
+        updateHeaderDom(storedGoal)       
+        return
     }
+
+    //if no goal page data
+    //direct to user -info page
+    newUserProfile.goToPage("./user-info.html")
+
 }
 init()
