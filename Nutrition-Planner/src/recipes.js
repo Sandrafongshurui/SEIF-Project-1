@@ -20,7 +20,25 @@ async function fetchDataAsync(url, options) {
     const filteredCaloriesRecipes = recipeArray.filter(checkCals)
     //filter more base on nutrients
     const filteredRecipes = checkNutrients(filteredCaloriesRecipes)
+    //populate the recipes sections
     console.log(filteredRecipes)
+    displayInGrid(filteredRecipes)
+}
+
+function displayInGrid(filteredRecipes){
+    const grids = document.getElementsByTagName("h3")
+    const imgs = document.getElementsByTagName("img")
+    const imgsArray = [...imgs]
+    const gridArray = [...grids]
+    console.log(gridArray)
+    gridArray.forEach(eachGrid => {
+        eachGrid.innerHTML= "Raasin"
+   });
+   imgsArray.forEach(eachImg => {
+    eachImg.src= filteredRecipes[0].recipe.image
+});
+
+
 }
 
 function checkCals(eachRecipe) {

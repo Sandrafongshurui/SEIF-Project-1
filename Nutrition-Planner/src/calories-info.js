@@ -2,7 +2,7 @@ import newUserProfile from "./JavaScript Files/main.js"
 import { CalculatedNutrients } from "./JavaScript Files/main.js"
 const goalCalculatedNutrients = new CalculatedNutrients(newUserProfile.goal)
 //by default maintenece
-const maintainenceCalculatedNutrients = new CalculatedNutrients("maintnence")
+const maintainenceCalculatedNutrients = new CalculatedNutrients("maintainence")
 console.log("this is the calories-info.js")
 
 
@@ -24,6 +24,7 @@ function addEventListeners() {
                 console.log("show maintenece calories info")
                 //input the info in the table
                 maintainenceCalculatedNutrients.inputValuesInTable()
+                console.log(maintainenceCalculatedNutrients.totalCaloriesInfo)
                 //store the selecetd btn
                 newUserProfile.selectedCaloriesInfo = "maintainenceCaloriesInfo"
 
@@ -47,6 +48,7 @@ function addEventListeners() {
     document.getElementById("btn-get-recipes").addEventListener('click', () => {
         newUserProfile.storeValue("calories-info", getCaloriesInfo(), true)
         //get the selected buttton, recepies recommedation base on that
+        newUserProfile.goToPage("./recipes.html")
 
     })
 
@@ -60,23 +62,30 @@ function getCaloriesInfo() {
     return combineCaloriesInfo
 }
 
-// function inputStorage() {
+function inputStorage() {
 
-//     console.log("this page has data")
+    console.log("this page has data")
 
-//     const calorieInfoData = newUserProfile.getData("calories-info")
-//     goalCalculatedNutrients.inputValuesInTable()
-//     // need to set the innnertext again, because the inputValuesInTable() is invoked if theres no storage, so calculations is done on awake
-//     // with storage, no need for calculation, certain values in inputValuesInTable() has not been calculated
-//     //so need to input the storage's data instead
-//     document.getElementById("calories-num").innerText = calorieInfoData.goalCaloriesInfo.calories
-//     document.getElementById("carbs-in-cal").innerText = calorieInfoData.goalCaloriesInfo.carbs.cal
-//     document.getElementById("prot-in-cal").innerText = calorieInfoData.goalCaloriesInfo.protein.cal
-//     document.getElementById("fats-in-cal").innerText = calorieInfoData.goalCaloriesInfo.fats.cal
-//     // // document.getElementById("carbs-in-gram").innerText =  carbInGram
-//     // // document.getElementById("prot-in-gram").innerText =  protInGram
-//     // // document.getElementById("fats-in-gram").innerText =  fatsInGram
-// }
+    const calorieInfoData = newUserProfile.getData("calories-info")
+    //input the storage's data into the  calculated nutrients
+    maintainenceCalculatedNutrients.totalCaloriesInfo = calorieInfoData.maintainenceCaloriesInfo
+    goalCalculatedNutrients.totalCaloriesInfo = calorieInfoData.goalCaloriesInfo
+    //display goal value only, because by default only shows goal on awake
+    goalCalculatedNutrients.inputValuesInTable()
+    // need to set the innnertext again, because the inputValuesInTable() is invoked if theres no storage, so calculations is done on awake
+    // with storage, no need for calculation, certain values in inputValuesInTable() has not been calculated
+    //so need to input the storage's data instead
+    // document.getElementById("calories-num").innerText = calorieInfoData.goalCaloriesInfo.calories
+    // document.getElementById("carbs-in-cal").innerText = calorieInfoData.goalCaloriesInfo.carbs.cal
+    // document.getElementById("prot-in-cal").innerText = calorieInfoData.goalCaloriesInfo.protein.cal
+    // document.getElementById("fats-in-cal").innerText = calorieInfoData.goalCaloriesInfo.fats.cal
+    //same for the mainteneceCaloriesINfo, it has not been calculated
+
+
+    // // document.getElementById("carbs-in-gram").innerText =  carbInGram
+    // // document.getElementById("prot-in-gram").innerText =  protInGram
+    // // document.getElementById("fats-in-gram").innerText =  fatsInGram
+}
 
 function calculateCaloriesAndNutrients() {
 
@@ -103,6 +112,7 @@ function init() {
     //if have ,means calories and nutrients has been calculated already, just need to input to table
     if (newUserProfile.hasStorage("calories-info")) {
         console.log("calories-info page has data")
+        //display the goal nutrients in the table
         inputStorage()
         return
     }
