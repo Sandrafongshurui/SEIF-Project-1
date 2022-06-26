@@ -36,6 +36,7 @@ class UserProfile {
             "goalCaloriesInfo": { ...totalCaloriesInfoTemplate },
             "maintainenceCaloriesInfo": { ...totalCaloriesInfoTemplate }
         }
+        this.selectedCaloriesInfo =  "goalCaloriesInfo"
     }
     //store in the this class
     storeValue(pageData, value, storeInLocalStorage) {

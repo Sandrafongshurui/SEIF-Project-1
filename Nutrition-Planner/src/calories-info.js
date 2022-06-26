@@ -17,11 +17,16 @@ function addEventListeners() {
                 console.log("show goal calories info")
                 //input the info in the table,  since its been calculate at init(), no need caculateNutrients
                 goalCalculatedNutrients.inputValuesInTable()
+                //store the selecetd btn
+                newUserProfile.selectedCaloriesInfo = "goalCaloriesInfo"
 
             } else {
                 console.log("show maintenece calories info")
                 //input the info in the table
                 maintainenceCalculatedNutrients.inputValuesInTable()
+                //store the selecetd btn
+                newUserProfile.selectedCaloriesInfo = "maintainenceCaloriesInfo"
+
 
             }
 
@@ -41,6 +46,8 @@ function addEventListeners() {
     //click get recipes button, then store in local storage
     document.getElementById("btn-get-recipes").addEventListener('click', () => {
         newUserProfile.storeValue("calories-info", getCaloriesInfo(), true)
+        //get the selected buttton, recepies recommedation base on that
+
     })
 
 }
