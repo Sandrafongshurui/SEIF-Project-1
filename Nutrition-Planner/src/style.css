@@ -1,23 +1,24 @@
 /* Style the buttons */
 daily-activity.btn {
-    border: none;
-    outline: none;
-    padding: 10px 16px;
-    background-color: #f1f1f1;
-    cursor: pointer;
-  }
-  
-  /* Style the active class (and buttons on mouse-over) */
-  .active, .btn:hover {
-    background-color: #666;
-    color: white;
-  }
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
 
-  .recipe-item{
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    border: black solid;
-    padding: 0;
-  }
+/* Style the active class (and buttons on mouse-over) */
+.active,
+.btn:hover {
+  background-color: #666;
+  color: white;
+}
 
+.recipe-item p{
+  font-family: 'Courier New', Courier, monospace;
+ 
+}
+
+.recipe-item {
+  border: rgba(102, 102, 102, 0.329) solid;
+}
