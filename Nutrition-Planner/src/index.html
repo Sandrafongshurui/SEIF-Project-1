@@ -9,16 +9,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One&family=Paytone+One&family=Poiret+One&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <label for="indicated-goal">Indicate Goal:</label>
-    <div id="indicated-goal">
-        <button type= "button" class="btn" id="goal-weight-loss">Weight-loss</button>
-        <button type= "button" class="btn" id="goal-muscle-gain">Muscle-gain</button>
-        <button type= "button" class="btn" id="goal-tone-up">Tone-up</button>
+    <div class="main text-center mt-5">
+        <h1 class="mb-4">HEALTH UP</h1>
+        <h3 class="mb-3">Indicate your goal:</h3>
+        <section class="goal-selection-sect">
+            <div id="indicated-goal">
+                <div class="mb-3">
+                    <button type="button" class="btn" id="goal-weight-loss">Weight-loss</button>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn" id="goal-muscle-gain">Muscle-gain</button>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn" id="goal-tone-up">Tone-up</button>
+                </div>
+            </div>
+        </section>
+
+
     </div>
-    <script type = module src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
 </body>
 
 </html>

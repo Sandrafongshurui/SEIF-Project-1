@@ -6,56 +6,101 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One&family=Paytone+One&family=Poiret+One&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <div class="main">
-        <h2 id="indicated-goal-header">
-            Weight-loss
-        </h2>
+    <div class="main text-center mt-5">
+        <section class="title-page">
+            <div class="border-bottom">
+                <h2>
+                    Body Information
+                </h2>
+            </div>
+        </section>
         <div id="user-info-page">
             <form>
-                <label for="user-info-gender">Gender:</label>
+                <div class="d-inline-flex mb-1">
+                    <label class="me-3" for="user-info-goal">Goal:</label>
+                    <p class="ms-2" id="indicated-goal-header">Weight-loss</p>
+                </div>
+
                 <div id="user-info-gender">
-                    <label for="male-value">Male</label>
-                    <input id="male-value" type="radio" value="male">
-                    <label for="female-value">Female</label>
-                    <input id="female-value" type="radio" value="female">
+
+                    <div class="d-inline-block mb-3">
+                        <label class="me-3" for="user-info-gender">Gender:</label>
+                        <input id="male-value" type="radio" name="sex" value="male">
+                        <label class="me-5" for="male-value">Male</label>
+                        <input id="female-value" type="radio" name="sex" value="female">
+                        <label class="me-4" for="female-value">Female</label>
+                    </div>
+
+
+                </div>
+                <div class="ms-3 mb-3">
+                    <label class="me-2" for="age-value">Age :</label>
+                    <input id="age-value" type="number" placeholder="21-60">
+                </div>
+                <div class="mb-3">
+                    <label class="me-2" for="height-value">Height :</label>
+                    <input id="height-value" type="number" placeholder="cm">
+                </div>
+                <div class="mb-3">
+                    <label class="me-2" for="weight-value">Weight :</label>
+                    <input id="weight-value" type="number" placeholder="kg">
                 </div>
 
-                <label for="age-value">Age:</label><br>
-                <input id="age-value" type="number"><br>
+                <section class="selection-sect">
+                    <label for="exercise-freq">Select the option that best describes your weekly physical
+                        activity:</label>
+                    <div id="exercise-freq" class="mb-3 mt-3">
+                        <div class=" d-inline-flex flex-wrap justify-content-center">
+                            <div>
+                                <div class="mb-3">
+                                    <button type="button" id="option-1"
+                                        class="btn"><strong>Sedentary</strong><br><small></small>desk job and little to
+                                        no
+                                        exercise</button>
+                                </div>
+                                <div class="mb-3">
+                                    <button type="button" id="option-2" class="btn"><strong>Lightly
+                                            Active</strong><br><small>light exercise/sports
+                                            1-3days/week</small></button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="mb-3">
+                                    <button type="button" id="option-3" class="btn"><strong>Moderately
+                                            Active</strong><br><small>
+                                            moderate exercise/sports
+                                            3-5days/week</small></button>
+                                </div>
+                                <div class="mb-3">
 
-                <label for="height-value">Height:</label><br>
-                <input id="height-value" type="number"><br>
+                                    <button type="button" id="option-4" class="btn font-s"><strong>Extremely
+                                            Active</strong><br><small>hard daily exercise/sports
+                                            and physical job or training</small></button>
+                                </div>
+                            </div>
+                        </div>
 
-                <label for="weight-value">Weight:</label><br>
-                <input id="weight-value" type="number"><br>
 
-                <label for="daily-activity">Select the statement that decribes you best:</label>
-                <div id="daily-activity">
-                    <button type="button" id="option-1" class="btn">i am Seated most of the time</button>
-                    <button type="button" id="option-2" class="btn">i stand around most of the time</button>
-                    <button type="button" id="option-3" class="btn">i Move around 50% most of the time</button>
-                    <button type="button" id="option-4" class="btn">i Move around 100% most of the time</button>
-                </div>
-
-                <label for="exercise-freq">Select the option that best describes your weeky exercise frequency</label>
-                <div id="exercise-freq">
-                    <button type="button" id="option-1" class="btn">little/no excercise</button>
-                    <button type="button" id="option-2" class="btn">moderate excercise 2-3 days</button>
-                    <button type="button" id="option-3" class="btn">moderate excercise 4-5 days</button>
-                    <button type="button" id="option-4" class="btn">Intense excercise 4-5</button>
-                </div>
+                    </div>
+                </section>
 
             </form>
-            <button id="btn-calculate">Calculate</button>
+            <section class="footer-sect">
+                <button id="btn-calculate" type="button" class="btn">Calculate</button>
+            </section>
         </div>
     </div>
-    <script type=module src="./user-info.js"></script>
+    <script type="module" src="./user-info.js"></script>
 </body>
 
 </html>

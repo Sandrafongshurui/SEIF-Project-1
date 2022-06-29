@@ -1,9 +1,12 @@
 import newUserProfile from "./JavaScript Files/main.js"
-import { CalculatedNutrients } from "./JavaScript Files/main.js"
-const goalCalculatedNutrients = new CalculatedNutrients(newUserProfile.goal)
+import { goalCalculatedNutrients } from "./JavaScript Files/main.js"
+
+
+//const goalCalculatedNutrients = new CalculatedNutrients(newUserProfile.goal)
 //by default maintenece
-const maintainenceCalculatedNutrients = new CalculatedNutrients("maintainence")
+//const maintainenceCalculatedNutrients = new CalculatedNutrients("maintainence")
 console.log("this is the calories-info.js")
+
 
 
 function addEventListeners() {
@@ -15,18 +18,17 @@ function addEventListeners() {
             console.log(selectedCaloriesId)
             if (selectedCaloriesId === "btn-goal-calories") {
                 console.log("show goal calories info")
-                //input the info in the table,  since its been calculate at init(), no need caculateNutrients
-                goalCalculatedNutrients.inputValuesInTable()
+                //input the info in the table, 
+                goalCalculatedNutrients.inputValuesInTable(newUserProfile.goalNutrientsInfo)
                 //store the selecetd btn
-                newUserProfile.selectedCaloriesInfo = "goalCaloriesInfo"
+                newUserProfile.selectedCaloriesInfo = "goalNutrientsInfo"
 
             } else {
                 console.log("show maintenece calories info")
                 //input the info in the table
-                maintainenceCalculatedNutrients.inputValuesInTable()
-                console.log(maintainenceCalculatedNutrients.totalCaloriesInfo)
+                goalCalculatedNutrients.inputValuesInTable(newUserProfile.maintainenceNutrientsInfo)
                 //store the selecetd btn
-                newUserProfile.selectedCaloriesInfo = "maintainenceCaloriesInfo"
+                newUserProfile.selectedCaloriesInfo = "maintainenceNutrientsInfo"
 
 
             }
@@ -46,105 +48,120 @@ function addEventListeners() {
     })
     //click get recipes button, then store in local storage
     document.getElementById("btn-get-recipes").addEventListener('click', () => {
-        newUserProfile.storeValue("calories-info", getCaloriesInfo(), true)
+        newUserProfile.storeValue("goal-nutrients-info", goalCalculatedNutrients.goalNutrientsInfo, true)
+        newUserProfile.storeValue("maintainence-nutrients-info", goalCalculatedNutrients.maintainenceNutrientsInfo, true)
+        newUserProfile.storeValue("selected-calories-info", newUserProfile.selectedCaloriesInfo, true)
         //get the selected buttton, recepies recommedation base on that
+        console.log(newUserProfile)
         newUserProfile.goToPage("./recipes.html")
 
     })
 
 }
 
-function getCaloriesInfo() {
-    const combineCaloriesInfo = {}
-    //add a goald and maintenence as key/value pair, same format as userprofile totalCaloriesInfo
-    combineCaloriesInfo.goalCaloriesInfo = goalCalculatedNutrients.totalCaloriesInfo
-    combineCaloriesInfo.maintainenceCaloriesInfo = maintainenceCalculatedNutrients.totalCaloriesInfo
-    return combineCaloriesInfo
-}
-
-function inputStorage() {
-
-    console.log("this page has data")
-
-    const calorieInfoData = newUserProfile.getData("calories-info")
-    //input the storage's data into the  calculated nutrients
-    maintainenceCalculatedNutrients.totalCaloriesInfo = calorieInfoData.maintainenceCaloriesInfo
-    goalCalculatedNutrients.totalCaloriesInfo = calorieInfoData.goalCaloriesInfo
-    //display goal value only, because by default only shows goal on awake
-    goalCalculatedNutrients.inputValuesInTable()
-    // need to set the innnertext again, because the inputValuesInTable() is invoked if theres no storage, so calculations is done on awake
-    // with storage, no need for calculation, certain values in inputValuesInTable() has not been calculated
-    //so need to input the storage's data instead
-    // document.getElementById("calories-num").innerText = calorieInfoData.goalCaloriesInfo.calories
-    // document.getElementById("carbs-in-cal").innerText = calorieInfoData.goalCaloriesInfo.carbs.cal
-    // document.getElementById("prot-in-cal").innerText = calorieInfoData.goalCaloriesInfo.protein.cal
-    // document.getElementById("fats-in-cal").innerText = calorieInfoData.goalCaloriesInfo.fats.cal
-    //same for the mainteneceCaloriesINfo, it has not been calculated
-
-
-    // // document.getElementById("carbs-in-gram").innerText =  carbInGram
-    // // document.getElementById("prot-in-gram").innerText =  protInGram
-    // // document.getElementById("fats-in-gram").innerText =  fatsInGram
-}
-
 function calculateCaloriesAndNutrients() {
 
     //get the calories number base for goal and maintenence 
     //medthod to stalled is in userprofile beacuse the user-info from there is needed to calculate it
-    maintainenceCalculatedNutrients.totalCaloriesInfo.calories = newUserProfile.calculateMaintainenceCalories()
-    goalCalculatedNutrients.totalCaloriesInfo.calories = newUserProfile.calculateGoalCalories()
-    //calculate the breakdown of the claories and input into nutrients table,  inputValuesInTable()
-    maintainenceCalculatedNutrients.calculateNutrients()
-    goalCalculatedNutrients.calculateNutrients()
+    goalCalculatedNutrients.maintainenceNutrientsInfo.calories = newUserProfile.calculateMaintainenceCalories()
+    goalCalculatedNutrients.goalNutrientsInfo.calories = newUserProfile.calculateGoalCalories()
+    console.log(goalCalculatedNutrients.maintainenceNutrientsInfo.calories)
+    console.log(goalCalculatedNutrients.goalNutrientsInfo.calories)
+
+    //calculate the breakdown of the maintainenec nutrients
+    goalCalculatedNutrients.calculateMaintainenceNutrients()
+    //store in newuserprofile
+    newUserProfile.maintainenceNutrientsInfo = goalCalculatedNutrients.maintainenceNutrientsInfo
+    console.log(goalCalculatedNutrients.maintainenceNutrientsInfo)
+
+    //calculate the breakdown of the goal nutrients
+    goalCalculatedNutrients.calculateGoalNutrients()
+    //store in newuserprofile
+    newUserProfile.goalNutrientsInfo = goalCalculatedNutrients.goalNutrientsInfo
+    console.log(goalCalculatedNutrients.goalNutrientsInfo)
 
 }
+
 function init() {
 
     console.log("init")
     console.log(localStorage)
+    //localStorage.clear()
     addEventListeners()
-    
+    document.getElementById("calories-required").click()
+    //calculateCaloriesAndNutrients()
+
     //by default selected goal is the the cative button
     const defaultSelected = document.getElementById("btn-goal-calories")
     defaultSelected.className += " active"
 
-    //check if theres calories-info storage 
-    //if have ,means calories and nutrients has been calculated already, just need to input to table
-    if (newUserProfile.hasStorage("calories-info")) {
-        console.log("calories-info page has data")
+    //check if theres goal-nutrients-info storage 
+    //means calories and nutrients has been calculated already, just need to input to table
+    if (newUserProfile.hasStorage("goal-nutrients-info")) {
+        console.log("goal-nutrients-info page has data")
+        //get data
+        newUserProfile.inputstorage("goal-nutrients-info")
+        newUserProfile.inputstorage("maintainence-nutrients-info")
+        // const storedGoalInfo = newUserProfile.getData("goal-nutrients-info")
+        // const storedMaintainenceInfo = newUserProfile.getData("maintainence-nutrients-info")
+        // //store in the newUserProfile, no need to store in local storage agian, so false
+        // newUserProfile.storeValue("goal-nutrients-info", storedGoalInfo, false)
+        // newUserProfile.storeValue("maintainence-nutrients-info", storedMaintainenceInfo, false)
+
+        newUserProfile.inputstorage("goal")
+        newUserProfile.inputstorage("user-info")
+        goalCalculatedNutrients.goal = newUserProfile.goal
+        //     const storedUserInfo = newUserProfile.getData("user-info")
+        //     //store in the newUserProfile, no need to store in local storage agian, so false
+        //    newUserProfile.storeValue("user-info", storedUserInfo, false)
+
+        //    const storedGoal = newUserProfile.getData("goal")
+        //    //store in the newUserProfile, no need to store in local storage agian, so false
+        //    newUserProfile.storeValue("goal", storedGoal, false)
+
         //display the goal nutrients in the table
-        inputStorage()
+        console.log(newUserProfile)
+        calculateCaloriesAndNutrients()
+        //goalCalculatedNutrients.inputValuesInTable(newUserProfile.goalNutrientsInfo)
+
+        //inputStorage()
         return
     }
 
-    //if no calories-info page data, check if got user-info page data
+    //if no goal-nutrients-info page data, check if got user-info page data
     //if have , get the data
     //use it to calculate for this page, and also store it in the newUserProfile
     if (newUserProfile.hasStorage("user-info")) {
         console.log("user-info page has data")
-        const storedUserInfo = newUserProfile.getData("user-info")
-        //no need to store in local storage agian, so false
-        newUserProfile.storeValue("user-info", storedUserInfo, false)
+        newUserProfile.inputstorage("goal")
+        newUserProfile.inputstorage("user-info")
+        goalCalculatedNutrients.goal = newUserProfile.goal
+        // //get data
+        // const storedUserInfo = newUserProfile.getData("user-info")
+        //  //store in the newUserProfile, no need to store in local storage agian, so false
+        // newUserProfile.storeValue("user-info", storedUserInfo, false)
         //calculate base on storedUserInfo
         calculateCaloriesAndNutrients()
         return
     }
 
-    //check if goal local storage is present
+    //if no user-info page data, check if goal localstorage is present
     //if have, get the data
     if (newUserProfile.hasStorage("goal")) {
-        const storedGoal = newUserProfile.getData("goal")
-        console.log(localStorage)
-        //store in the newUserProfile, no need to store in local storage agian, so false
-        newUserProfile.storeValue("goal", storedGoal, false)
-        console.log(newUserProfile.goal)
+        console.log("goal page has data")
+         newUserProfile.inputstorage("goal")
+         goalCalculatedNutrients.goal = newUserProfile.goal
+        // //get data
+        // const storedGoal = newUserProfile.getData("goal")
+        // //store in the newUserProfile, no need to store in local storage agian, so false
+        // newUserProfile.storeValue("goal", storedGoal, false)
         //direct to user -info page
         newUserProfile.goToPage("./user-info.html")
         return
     }
 
-    //if no goal page data
-    //direct to index page
+    // //if no goal page data
+    // //direct to index page
     newUserProfile.goToPage("./index.html")
 }
 init()

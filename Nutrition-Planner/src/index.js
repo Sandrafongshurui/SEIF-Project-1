@@ -38,15 +38,16 @@ function init() {
     addEventListeners()
     console.log(localStorage)
     //everything it goes index page again, it restarts
-    localStorage.clear()
+    //localStorage.clear()
     console.log(localStorage)
     //check if goal local storage is present
     //if have, get the data
     if (newUserProfile.hasStorage("goal")) {
-        const storedGoal = newUserProfile.getData("goal")
-        //store in the newUserProfile, no need to store in local storage agian, so false
-        newUserProfile.storeValue("goal", storedGoal, false)
-        updateDom(storedGoal)
+        newUserProfile.inputstorage("goal")
+        // const storedGoal = newUserProfile.getData("goal")
+        // //store in the newUserProfile, no need to store in local storage agian, so false
+        // newUserProfile.storeValue("goal", storedGoal, false)
+        updateDom(newUserProfile.goal)
         return
     }
     //Brand new user, so clear any data
