@@ -1,4 +1,3 @@
-//able to do it becausecos type is module in the linked html file. no module, it will have error
 import newUserProfile from "./JavaScript Files/main.js"
 
 function addEventListeners() {
@@ -15,14 +14,13 @@ function addEventListeners() {
         newUserProfile.goToPage("./user-info.html")
     })
 }
+
 function updateDom(goal) {
     //make goal option active,
-    //const goalOptions = document.getElementById("indicated-goal")
     //returns an array of buttons in the indicated-goal
     const option = document.getElementsByClassName("btn")
     for (const child of option) {
         if (child.id === `goal-${goal}`) {
-            //child.className += " active"
             child.focus();
             break
         }
@@ -30,23 +28,14 @@ function updateDom(goal) {
 }
 
 function init() {
-    console.log('init');
+    console.log(localStorage)
     addEventListeners()
-    console.log(localStorage)
-    //everything it goes index page again, it restarts
-    
-    console.log(localStorage)
+
     //check if goal local storage is present
-    //if have, get the data
     if (newUserProfile.hasStorage("goal")) {
-        newUserProfile.inputstorage("goal")
-        // const storedGoal = newUserProfile.getData("goal")
-        // //store in the newUserProfile, no need to store in local storage agian, so false
-        // newUserProfile.storeValue("goal", storedGoal, false)
+        newUserProfile.inputStorage("goal")
         updateDom(newUserProfile.goal)
-        return
     }
-    localStorage.clear()
-  
 }
+
 init()

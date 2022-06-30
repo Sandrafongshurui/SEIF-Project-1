@@ -24,14 +24,13 @@
                 </h2>
             </div>
         </section>
-        <div id="user-info-page">
+        <section id="user-info-page">
             <form id="myform">
                 <section>
                     <div class="d-inline-flex mb-1">
                         <label class="me-3" for="user-info-goal">Goal:</label>
                         <h3 class="ms-2" id="indicated-goal-header">Weight-loss</h3>
                     </div>
-
                     <div id="user-info-gender">
                         <div class="d-inline-block mb-3 gender-select">
                             <label class="me-3" for="user-info-gender">Gender:</label>
@@ -40,7 +39,7 @@
                             <input id="female-value" type="radio" name="sex" value="female">
                             <label class="me-4" for="female-value">Female</label>
                         </div>
-                    </div>
+                    </div>               
                     <div class="ms-3 mb-3">
                         <label class="me-2" for="age-value">Age :</label>
                         <input id="age-value" type="number" placeholder="21-80 years old" required min="21" max="80" >
@@ -53,40 +52,35 @@
                     </div>
                     <div class="mb-3">
                         <label class="me-2" for="weight-value">Weight :</label>
-                        <input id="weight-value" type="number" placeholder="kg" required min="45" max="150">
-                        
+                        <input id="weight-value" type="number" placeholder="kg" required min="45" max="150">                       
                     </div>
                 </section>
                 <section class="selection-sect">
-                    <label for="exercise-freq">Select the option that best describes your weekly physical
-                        activity:</label>
+                    <label for="exercise-freq">Select the option that best describes your weekly physical activity:</label>
                     <div id="exercise-freq" class="mb-3 mt-3">
                         <div class=" d-inline-flex flex-wrap justify-content-center">
                             <div>
                                 <div class="mb-3">
-                                    <button type="button" id="option-1"
-                                        class="btn"><strong>Sedentary</strong><br><small>desk job and little to
-                                        no
-                                        exercise</small></button>
+                                    <button type="button" id="option-1"class="btn">
+                                        <strong>Sedentary</strong><br><small>desk job and little to no exercise</small>
+                                    </button>
                                 </div>
                                 <div class="mb-3">
-                                    <button type="button" id="option-2" class="btn"><strong>Lightly
-                                            Active</strong><br><small>light exercise/sports
-                                            1-3days/week</small></button>
+                                    <button type="button" id="option-2" class="btn">
+                                        <strong>Lightly Active</strong><br><small>light exercise/sports 1-3days/week</small>
+                                    </button>
                                 </div>
                             </div>
                             <div>
                                 <div class="mb-3">
-                                    <button type="button" id="option-3" class="btn"><strong>Moderately
-                                            Active</strong><br><small>
-                                            moderate exercise/sports
-                                            3-5days/week</small></button>
+                                    <button type="button" id="option-3" class="btn">
+                                        <strong>Moderately Active</strong><br><small> moderate exercise/sports 3-5days/week</small>
+                                    </button>
                                 </div>
                                 <div class="mb-3">
-
-                                    <button type="button" id="option-4" class="btn"><strong>Extremely
-                                            Active</strong><br><small>hard daily exercise/sports
-                                            and physical job or training</small></button>
+                                    <button type="button" id="option-4" class="btn">
+                                        <strong>Extremely Active</strong><br><small>hard daily exercise/sports and physical job or training</small>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +90,7 @@
                     <button id="btn-calculate" type="submit" class="btn">Calculate</button>
                 </section>
             </form>
-        </div>
+        </section>
     </div>
     <script type="module" src="./user-info.js"></script>
 </body>

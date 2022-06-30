@@ -48,3 +48,22 @@ console.log(tiger.object)
 //  object2.key1 = 3
 //  console.log(object.key1)
 //  console.log(object2.key1)
+
+function displayInGrid(filteredRecipes) {
+    const recipeName = document.getElementsByTagName("h3")
+    const links = document.getElementsByTagName("a")
+    const imgs = document.getElementsByTagName("img")
+    const carbSpan = document.getElementsByClassName("carbs-span")
+    const protSpan = document.getElementsByClassName("prot-span")
+    const fatsSpan = document.getElementsByClassName("fats-span")
+    const filteredRecipesLen = filteredRecipes.length
+    for (let i = 0; i < filteredRecipesLen; i++) {
+        console.log(filteredRecipes[i].recipe.label)
+        imgs[i].src = filteredRecipes[i].recipe.image
+        links[i].href = filteredRecipes[i].recipe.url
+        recipeName[i].innerText = filteredRecipes[i].recipe.label
+        carbSpan[i].innerText = `Carbs:${Math.round(filteredRecipes[i].recipe.totalNutrients.CHOCDF.quantity)}g`
+        protSpan[i].innerText = ` Protein:${Math.round(filteredRecipes[i].recipe.totalNutrients.PROCNT.quantity)}g`
+        fatsSpan[i].innerText = ` Fats:${Math.round(filteredRecipes[i].recipe.totalNutrients.FAT.quantity)}g`
+    }
+}
