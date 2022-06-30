@@ -24,26 +24,43 @@
                 </h2>
             </div>
         </section>
-        <section class="selection-sect">
+        <section class="selection-sect ps-3 pe-3">
         <p> Your estimated daily caloric intake for <span id="goal">weight loss<span> is: <span id="calories">2000 calories<span><br>
         <div id="calories-required" class="d-flex justify-content-center mb-3 flex-wrap calories-requirements">
-            <div >
-                <button type="button" class="btn" id="btn-goal-calories"><strong>1500
-                        cal</strong><br><small>Weight-loss</small></button>
-            </div>
-            <div> 
-                <button type="button" class="btn" id="btn-maintenence-calories">2000 cal<br>Maintainence</button>
-            </div>
+            <!-- <div > -->
+                <button type="button" class="btn active" id="btn-goal-calories">
+                   <p id="btn-goal-num" class="m-0">1500 cal</p>
+                    <p id="btn-goal-name" class="m-0">Weight-loss</p>
+                </button>
+            <!-- </div> -->
+            <!-- <div>  -->
+                <button type="button" class="btn" id="btn-maintainence-calories">
+                    <p id="btn-maintainence-num" class="m-0">1500 cal</p>
+                    <p id="btn-maintainence-name" class="m-0">Maintainence</p>
+                </button>
+            <!-- </div> -->
 
         </div>
         </section>
         <section class="description-sect ps-3 pe-3" id="calories-description">
-            <p> 
-            Weight loss folllows a <strong>40/30/30</strong> plan where <strong>40%</strong> of your daily
-                calories come
-                for carbohydrate sources, <strong>30% </strong>from protein sources and <strong>30%</strong> from fat sources, which can be
-                measured in calories or grams.
-            </p>
+            <article class="mb-3 maintainence-article"> 
+                <strong>Maintainence calories</strong> follows a nutritional guideline of <strong>40% carbs, 30% protein, 30% fats.</strong> 
+                It is calculated base on your body information and physical activity level.
+            </article>
+            <hr class="hr3">
+            <article id="goal-article">
+                <p id="weight-loss-article"class="article m-0 d-none"><span>Weight loss</span> folllows a <span>40% / 30% / 30%</span> guideline.<br>Compared to maintainence, it has a deficit of 500 cal.
+                For most people, a calorie deficit of 500 calories per day is sufficient for weight loss.</p>
+
+                <p id="muscle-gain-article"class="article m-0 d-none"><span>Muscle gain</span> folllows a <span>40% / 40% / 20%</span> guideline.<br>Compared to maintainence, it has a surplus of 500 cal 
+                    with an increase intake of proteins and a decrease in fats. </p> 
+
+                <p id="tone-up-article"class="article m-0 d-none"><span>Tone up</span> folllows a <span>25% / 50% / 25%</span> guideline.<br> Compared to maintainence, amount of calories remain the same but
+                    with an increase intake of proteins and a decrease in carbohydrates and fats</p>       
+                <p>The respective breakdown of nutrients are shown in the table below.</p>
+            </article>
+
+           
         </section>
         <section class="ps-3 pe-3">
             <div class="container nutrient-table">

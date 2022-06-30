@@ -3,62 +3,37 @@ import newUserProfile from "./JavaScript Files/main.js"
 //console.log("this is the user-info.js")
 
 function addEventListeners() {
-    // const selectedDailyActivity = {
-    //     "option" : "",
-    //     "isChosen" : false
-    // }
-    //let dailyActivity = ""
     let exerciseFreq = ""
-    //const dailyActivityOptions = document.getElementById("daily-activity")
     const exerciseFreqOptions = document.getElementById("exercise-freq")
-    // document.getElementById("daily-activity").addEventListener('click', (event) => {
-    //     if (event.target.type === "button") {
-    //         dailyActivity = event.target.id
-    //         console.log(dailyActivity)
-    //         //set the chosen daily activity
-    //         // selectedDailyActivity.option = event.target.id
-    //         // selectedDailyActivity.isChosen = true
-
-    //         //make buttons "selected looking"
-    //         //remove active from the previous clicked button
-    //         const btns = dailyActivityOptions.getElementsByClassName("btn active")
-    //         //check if theres is a current active button
-    //         if (btns.length > 0) {
-    //             btns[0].className = btns[0].className.replace(" active", "");
-    //         }
-
-
-    //         //add the active class to current btn so it will highlight
-    //         event.target.className += " active"
-    //     } else {
-    //         console.log("not a button ")
-    //     }
-    // })
     document.getElementById("exercise-freq").addEventListener('click', (event) => {
+        //make buttons "selected looking"
+        //remove active form the previous clicked button
+        const btns = exerciseFreqOptions.getElementsByClassName("btn active")
+        if (btns.length > 0) {
+            btns[0].className = btns[0].className.replace(" active", "")
+        }
+
         if (event.target.type === "button") {
             exerciseFreq = event.target.id
-            console.log(exerciseFreq)
-            //make buttons "selected looking"
-            //remove active form the previous clicked button
-
-            const btns = exerciseFreqOptions.getElementsByClassName("btn active")
-            if (btns.length > 0) {
-                btns[0].className = btns[0].className.replace(" active", "")
-            }
-
-            //add the active class to it so it will highlight
             event.target.className += " active"
         }
+        else if (event.target.parentElement.type === "button") {
+            exerciseFreq = event.target.parentElement.id
+            event.target.parentElement.className += " active"
+        }
+
     })
 
-    document.getElementById("btn-calculate").addEventListener('click', () => {
-        //validate()       
+    document.getElementById("myform").addEventListener('submit', (event) => {
+        //prevent the default on submit function
+        event.preventDefault()
         newUserProfile.storeValue("user-info", getUserInputs(exerciseFreq), true)
         newUserProfile.goToPage("./calories-info.html")
+
     })
 
-
 }
+
 function getUserInputs(exerciseFreqOption) {
     //see which gender is checked
     if (document.getElementById("male-value").checked) {
@@ -69,7 +44,6 @@ function getUserInputs(exerciseFreqOption) {
     newUserProfile.userInfo.age = document.getElementById("age-value").value
     newUserProfile.userInfo.height = document.getElementById("height-value").value
     newUserProfile.userInfo.weight = document.getElementById("weight-value").value
-    //newUserProfile.userInfo.dailyactivity = selectedDailyActivity
     newUserProfile.userInfo.exercisefreq = exerciseFreqOption
     return newUserProfile.userInfo
 }
@@ -87,25 +61,13 @@ function updateDom(userInfo) {
     document.getElementById("age-value").value = userInfo.age
     document.getElementById("weight-value").value = userInfo.weight
     document.getElementById("height-value").value = userInfo.height
-    //make the daily-activity option active,
-    //const dailyActivityOptions = document.getElementById("daily-activity")
-    //returns an array of buttons in the dail-activity div
-    //const option = dailyActivityOptions.getElementsByClassName("btn")
-    // for (const child of option) {
-    //     if (child.id === userInfo.dailyactivity) {            
-    //         child.className += " active"
-    //         // invoke teh click so that it mimic user clikcing it, so that it gets stored 
-    //         child.click()
-    //         break
-    //     }
-    // }
-    //make the exercise-freq option active,
+
     const exerciseFreqOptions = document.getElementById("exercise-freq")
     //returns an array of buttons in the dail-activity div
     const btns = exerciseFreqOptions.getElementsByClassName("btn")
     for (const child of btns) {
         if (child.id === userInfo.exercisefreq) {
-            child.className += " active"
+            child.focus()
             // invoke teh click so that it mimic user clikcing it, so that it gets stored 
             child.click()
             break
@@ -116,19 +78,20 @@ function updateDom(userInfo) {
 }
 
 function updateHeaderDom(storedGoal) {
-    document.getElementById("indicated-goal-header").innerText = storedGoal
+    document.getElementById("indicated-goal-header").innerText = storedGoal.toUpperCase()
 }
 
+
 function init() {
-    //console.log(localStorage)
+    console.log(localStorage)
     //console.log('init');
     addEventListeners();
-    newUserProfile.goal
-
+    //newUserProfile.goal
     //check if user-info local storage is present
     //if have, get the data
     if (newUserProfile.hasStorage("user-info")) {
         newUserProfile.inputstorage("user-info")
+        newUserProfile.inputstorage("goal")
         // const storedUserInfo = newUserProfile.getData("user-info")
         // //store in the newUserProfile, no need to store in local storage agian, so false
         // newUserProfile.storeValue("user-info", storedUserInfo, false)

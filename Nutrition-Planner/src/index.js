@@ -1,10 +1,5 @@
-//this is importing the things inside  main.js
-//able to do it cos type is module in the linked html file. no module will hv error
-
-
+//able to do it becausecos type is module in the linked html file. no module, it will have error
 import newUserProfile from "./JavaScript Files/main.js"
-
-console.log("this is the index.js")
 
 function addEventListeners() {
     document.getElementById("goal-weight-loss").addEventListener('click', () => {
@@ -27,7 +22,8 @@ function updateDom(goal) {
     const option = document.getElementsByClassName("btn")
     for (const child of option) {
         if (child.id === `goal-${goal}`) {
-            child.className += " active"
+            //child.className += " active"
+            child.focus();
             break
         }
     }
@@ -38,7 +34,7 @@ function init() {
     addEventListeners()
     console.log(localStorage)
     //everything it goes index page again, it restarts
-    //localStorage.clear()
+    
     console.log(localStorage)
     //check if goal local storage is present
     //if have, get the data
@@ -50,7 +46,7 @@ function init() {
         updateDom(newUserProfile.goal)
         return
     }
-    //Brand new user, so clear any data
+    localStorage.clear()
   
 }
 init()
