@@ -43,8 +43,9 @@ function checkRecipeLabels(eachRecipe, appliedFilter) {
 async function fetchDataAsync(url, options) {
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(data.hits)//returns an array of 60 recipes
+    console.log(data.hits)//returns an array of 100
     const recipeArray = data.hits
+    checkYeild(recipeArray)
     //filter more base on calories count
     const filteredCaloriesRecipes = recipeArray.filter(checkCals)
     //filter more base on nutrients
@@ -53,6 +54,24 @@ async function fetchDataAsync(url, options) {
     newUserProfile.storeValue("recipes", filteredNutrientsRecipes, true)
     createReceipeGrid(filteredNutrientsRecipes)
 }
+
+function checkYeild(recipeArray){
+    recipeArray.forEach(eachRecipe => {
+       if( eachRecipe.recipe.yield > 1){
+             const calPerPax = eachRecipe.recipe.calories / eachRecipe.recipe.yield
+             eachRecipe.recipe.calories = calPerPax
+             const protPerPax = eachRecipe.recipe.totalNutrients.PROCNT.quantity / eachRecipe.recipe.yield
+             eachRecipe.recipe.totalNutrients.PROCNT.quantity = protPerPax
+             const carbsPerPax = eachRecipe.recipe.totalNutrients.CHOCDF.quantity / eachRecipe.recipe.yield
+             eachRecipe.recipe.totalNutrients.CHOCDF.quantity = carbsPerPax
+             const fatsPerPax = eachRecipe.recipe.totalNutrients.FAT.quantity / eachRecipe.recipe.yield
+             eachRecipe.recipe.totalNutrients.FAT.quantity = fatsPerPax
+       }
+
+    })
+}
+
+
 
 function checkCals(eachRecipe) {
     const recipeCalories = eachRecipe.recipe.calories
@@ -155,13 +174,16 @@ function init() {
         newUserProfile.inputStorage("selected-calories-info")
         newUserProfile.inputStorage("goal")
         newUserProfile.inputStorage("user-info")
+
+        //sometimes i get the 403 forbidden error when i get the recipes from my local storage
         //hide the loader-spinner, this only works for on awake
-        document.getElementById("loader-spinner-sect").style.display = "none"
-        document.getElementById("recipes-sect").style.display = "block"
+        // document.getElementById("loader-spinner-sect").style.display = "none"
+        // document.getElementById("recipes-sect").style.display = "block"
         //get recipes from userprofile
-        const recipeArray = newUserProfile.recipes
-        createReceipeGrid(recipeArray)
-        //fetchDataAsync("https://edamam-recipe-search.p.rapidapi.com/search?q=lunch&from=0&to=100", options)
+        //const recipeArray = newUserProfile.recipes
+        //createReceipeGrid(recipeArray)
+
+        fetchDataAsync("https://edamam-recipe-search.p.rapidapi.com/search?q=dinner&from=0&to=100", options)
         return
     }
 
