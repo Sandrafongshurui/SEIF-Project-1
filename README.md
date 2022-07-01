@@ -63,13 +63,13 @@ changed as well.
 -The button had a text inside it, and the text was using the atrong element. I had to troubleshoot to only realised that clicking on the text with the strong element is in fact not cliking the target element (button) at all.
 -Solving the part if user enters a page, and local storage is present load the storage. Means having to activate the button by focusing, and if user leaves the page without any changes, it means technically the button has not been clicked, so the option is not registered.
 
-4)Working with the API results
+4) Working with the API results
 
 -The results that return were not consistent, some recipes yield more than 1 servings, some more than 10 servings.
 -This was making my filtering very narrow for the user, as this app internally filters out the calories beyond the estimated one meal, so many results were not being displayed
 -I added an extra function to check the yield and divide the portions so i can maximise the results
 
-5)Time management
+5) Time management
 
 -Spent alot of time thinking about how and the best way to do it, as many instances I have done a certain function, only to realised i could hv done it in a faster way. Hence i spent more time thinking stuff through.
 
