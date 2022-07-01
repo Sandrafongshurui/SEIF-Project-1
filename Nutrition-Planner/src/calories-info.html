@@ -16,7 +16,33 @@
 </head>
 
 <body>
-    <div class="main text-center mt-5">
+    <div class="main text-center mt-5 calories-info-page">
+        <section class="steps-form">
+            <div class="steps-row setup-panel">
+                <div class="steps-container">
+                    <div class="steps-step goal-step">
+                        <a href="./index.html" type="button" class="btn btn-indigo btn-circle" id="goal-stepper"></a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step user-info-step">
+                        <a href="./user-info.html" type="button" class="btn btn-default btn-circle"
+                            disabled="" id="user-info-stepper"></a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step calories-info-step">
+                        <a href="./calories-info.html" type="button" class="btn btn-default btn-circle"
+                            disabled="" id="calories-info-stepper"></a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step recipes-step">
+                        <a href="./recipes.html" type="button" class="btn btn-default btn-circle"
+                            disabled="disabled" id="recipes-stepper"></a>
+                        <hr class="w-10">
+                    </div>
+
+                </div>
+            </div>
+        </section>
         <section class="title-page">
             <div class="border-bottom">
                 <h2 >
@@ -25,7 +51,7 @@
             </div>
         </section>
         <section class="selection-sect ps-3 pe-3">
-        <p> Your estimated daily caloric intake for <span id="goal">weight loss<span> is: <span id="calories">2000 calories</span></p>
+        <p> Your estimated daily caloric intake for <span ><strong id="span-goal">weight loss</strong></span> is: <span><strong id="span-calories">2000 calories</strong></span></p>
         <div id="calories-required" class="d-flex justify-content-center mb-3 flex-wrap calories-requirements">
             <button type="button" class="btn active" id="btn-goal-calories">
                 <p id="btn-goal-num" class="m-0">1500 cal</p>
@@ -75,7 +101,7 @@
                         <div class="col-3 " id="calories-num">
                             2000cal
                         </div>
-                        <div class="col-9">
+                        <div class="col-9 ">
                             <div class="row border-bottom" id="nutrient-table-percentage">
                                 <div class="col-4" id="carbs-in-per">Carbs</div>
                                 <div class="col-4" id="prot-in-per">Protein</div>

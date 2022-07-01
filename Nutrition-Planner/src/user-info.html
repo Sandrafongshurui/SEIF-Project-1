@@ -16,7 +16,33 @@
 </head>
 
 <body>
-    <div class="main text-center mt-5">
+    <div class="main text-center mt-5 user-info-page">
+        <section class="steps-form">
+            <div class="steps-row setup-panel">
+                <div class="steps-container">
+                    <div class="steps-step goal-step">
+                        <a href="./index.html" type="button" class="btn btn-indigo btn-circle" id="goal-stepper"></a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step user-info-step">
+                        <a href="./user-info.html" type="button" class="btn btn-default btn-circle"
+                            disabled="" id="user-info-stepper"></a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step calories-info-step">
+                        <a href="./calories-info.html" type="button" class="btn btn-default btn-circle"
+                            disabled="disabled" id="calories-info-stepper"></a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step recipes-step">
+                        <a href="./recipes.html" type="button" class="btn btn-default btn-circle"
+                            disabled="disabled" id="recipes-stepper"></a>
+                        <hr class="w-10">
+                    </div>
+
+                </div>
+            </div>
+        </section>
         <section class="title-page">
             <div class="border-bottom">
                 <h2>
@@ -47,12 +73,12 @@
                     </div>
                     <div class="mb-3">
                         <label class="me-2" for="height-value">Height :</label>
-                        <input id="height-value" type="number" placeholder="cm" required min="130" max="250">
+                        <input id="height-value" type="number" placeholder="cm" required min="130" max="200">
                         
                     </div>
                     <div class="mb-3">
                         <label class="me-2" for="weight-value">Weight :</label>
-                        <input id="weight-value" type="number" placeholder="kg" required min="45" max="150">                       
+                        <input id="weight-value" type="number" placeholder="kg" required min="45" max="100">                       
                     </div>
                 </section>
                 <section class="selection-sect">

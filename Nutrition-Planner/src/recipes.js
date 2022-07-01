@@ -45,7 +45,8 @@ async function fetchDataAsync(url, options) {
     const data = await response.json()
     console.log(data.hits)//returns an array of 100
     const recipeArray = data.hits
-    checkYeild(recipeArray)
+    //some recipes has more than 1 yields, so need to divide to get more accurate results
+    checkYield(recipeArray)
     //filter more base on calories count
     const filteredCaloriesRecipes = recipeArray.filter(checkCals)
     //filter more base on nutrients
@@ -55,7 +56,7 @@ async function fetchDataAsync(url, options) {
     createReceipeGrid(filteredNutrientsRecipes)
 }
 
-function checkYeild(recipeArray){
+function checkYield(recipeArray){
     recipeArray.forEach(eachRecipe => {
        if( eachRecipe.recipe.yield > 1){
              const calPerPax = eachRecipe.recipe.calories / eachRecipe.recipe.yield
@@ -67,24 +68,25 @@ function checkYeild(recipeArray){
              const fatsPerPax = eachRecipe.recipe.totalNutrients.FAT.quantity / eachRecipe.recipe.yield
              eachRecipe.recipe.totalNutrients.FAT.quantity = fatsPerPax
        }
-
     })
 }
-
-
 
 function checkCals(eachRecipe) {
     const recipeCalories = eachRecipe.recipe.calories
     //get the selected Calories Info, the calories counts
     const usersCalories = newUserProfile[newUserProfile.selectedCaloriesInfo].calories
     const estOneMealCalories = usersCalories / 3
+    inputPersonalisedTable(estOneMealCalories, 0, 0, 0)
     if (islessThan(recipeCalories, estOneMealCalories)) {
         console.log("suitable calories")
         return eachRecipe
     }
+
 }
 
 function checkNutrients(eachRecipe) {
+    const usersCalories = newUserProfile[newUserProfile.selectedCaloriesInfo].calories
+    const estOneMealCalories = usersCalories / 3
     //get protein, carbs, fats from recipe
     const recipeNutrients = eachRecipe.recipe.totalNutrients
     const recipeProtein = recipeNutrients.PROCNT.quantity
@@ -99,7 +101,7 @@ function checkNutrients(eachRecipe) {
     const estOneMealProtein = usersProtein / 3
     const estOneMealCarbs = usersCarbs / 3
     const estOneMealFats = usersFats / 3
-
+    inputPersonalisedTable(estOneMealCalories, estOneMealProtein, estOneMealCarbs,  estOneMealFats)
     //check that the recipe suits the user's nutritional needs
     if (islessThan(recipeProtein, estOneMealProtein) && islessThan(recipeCarbs, estOneMealCarbs) && islessThan(recipeFats, estOneMealFats)) {
         console.log("suitable nutrients")
@@ -156,6 +158,13 @@ function creatRecipeItem(eachRecipe) {
     return recipeItem
 }
 
+function inputPersonalisedTable(cals, carbs, protein, fats){
+  document.getElementById("calories").innerText = `${Math.round(cals)} cal`
+  document.getElementById("carbs-in-grams").innerText = `${Math.round(carbs)} g`
+  document.getElementById("prot-in-grams").innerText = `${Math.round(protein)} g`
+  document.getElementById("fats-in-grams").innerText = `${Math.round(fats)} g`
+}
+
 function init() {
     const options = {
         method: 'GET',
@@ -174,6 +183,7 @@ function init() {
         newUserProfile.inputStorage("selected-calories-info")
         newUserProfile.inputStorage("goal")
         newUserProfile.inputStorage("user-info")
+       
 
         //sometimes i get the 403 forbidden error when i get the recipes from my local storage
         //hide the loader-spinner, this only works for on awake
@@ -194,7 +204,8 @@ function init() {
         newUserProfile.inputStorage("maintainence-nutrients-info")
         newUserProfile.inputStorage("goal")
         newUserProfile.inputStorage("user-info")
-
+        ewUserProfile.inputStorage("user-info")
+        inputPersonalisedTable()
         fetchDataAsync("https://edamam-recipe-search.p.rapidapi.com/search?q=lunch&from=0&to=100", options)
         return
     }

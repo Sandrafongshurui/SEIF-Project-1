@@ -16,7 +16,33 @@
 </head>
 
 <body>
-  <div class="main text-center mt-5">
+  <div class="main text-center mt-5 recipe-page">
+    <section class="steps-form">
+      <div class="steps-row setup-panel">
+        <div class="steps-container">
+          <div class="steps-step goal-step">
+            <a href="./index.html" type="button" class="btn btn-indigo btn-circle" id="goal-stepper"></a>
+            <hr class="steps-separator">
+          </div>
+          <div class="steps-step user-info-step">
+            <a href="./user-info.html" type="button" class="btn btn-default btn-circle" disabled=""
+              id="user-info-stepper"></a>
+            <hr class="steps-separator">
+          </div>
+          <div class="steps-step calories-info-step">
+            <a href="./calories-info.html" type="button" class="btn btn-default btn-circle" disabled=""
+              id="calories-info-stepper"></a>
+            <hr class="steps-separator">
+          </div>
+          <div class="steps-step recipes-step">
+            <a href="./recipes.html" type="button" class="btn btn-default btn-circle" disabled=""
+              id="recipes-stepper"></a>
+            <hr class="w-10">
+          </div>
+
+        </div>
+      </div>
+    </section>
     <section class="title-page">
       <div class="border-bottom">
         <h2>
@@ -25,18 +51,38 @@
       </div>
     </section>
     <section id="loader-spinner-sect" style="display: inline-block;">
-      <div class="lds-ring"> 
+      <div class="lds-ring">
         <div></div>
         <div></div>
         <div></div>
         <div></div>
       </div>
-    <p>Loading recipes...</p>
+      <p>Loading recipes...</p>
     </section>
     <section id="recipes-sect" style="display: none;">
-      <section id="diet-filter" class="diet-filter-dropdown">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+      <section id="diet-filter" class="diet-filter-dropdown diet-sect">
+        <div>
+          <p class="text-left">Estimated per meal nutrients breakdwon</p>
+          <div class="row justify-content-center nutrient-table">
+            <div class="row">
+              <div class="d-inline-flex border-bottom justify-content-center" id="nutrient-table-title">
+                <div class="col-4" id="carbs-in-per">Calorie</div>
+                <div class="col-4" id="carbs-in-per">Carbs</div>
+                <div class="col-4" id="prot-in-per">Protein</div>
+                <div class="col-4" id="fats-in-per">Fats</div>
+              </div>
+              <div class="d-inline-flex border-bottom justify-content-center" id="nutrient-table-cal">
+                <div class="col-4" id="calories">Carbs</div>
+                <div class="col-4" id="carbs-in-grams">Carbs</div>
+                <div class="col-4" id="prot-in-grams">Protein</div>
+                <div class="col-4" id="fats-in-grams">Fats</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown align-self-center">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+            data-bs-toggle="dropdown" aria-expanded="false">
             Dietary
           </button>
           <ul class="dropdown-menu dropdown-menu-dark" id="filter-list" aria-labelledby="dropdownMenuButton2">
@@ -46,12 +92,26 @@
             <li id="no-filter" class="dropdown-item">No Filter</li>
           </ul>
         </div>
+        
       </section>
+      <div>
+        <p class="mt-3">
+          A healthy lifestyle is not base on caloric intake, both <strong>diet and exercise</strong> are pertinent when
+          it comes to your health goals!
+        </p>
+        <p>
+          Base on your provided information we have curated a list of recipes that will assist you to reach your
+          goal!<br>
+          Results are customized to your recommeded caloric and nutrients intake!
+        </p>
+
+      </div>
+
       <section class="recipe-container-grid">
         <div class="container text-center">
-          <div class="row mt-5 d-inline-flex flex-wrap justify-content-center" id="recipes-container">
+          <div class="row d-inline-flex flex-wrap justify-content-center" id="recipes-container">
             <div id="recipe-row-1">
-            <!-- Append Rcipes here -->
+              <!-- Append Rcipes here -->
 
             </div>
           </div>

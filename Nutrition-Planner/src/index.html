@@ -16,8 +16,33 @@
 </head>
 
 <body>
-    <div class="main text-center mt-5">
+    <div class="main text-center mt-5 goal-page">
+        <section class="steps-form">
+            <div class="steps-row setup-panel">
+                <div class="steps-container">
+                    <div class="steps-step goal-step">
+                        <a href="./index.html" type="button" class="btn btn-indigo btn-circle" id="goal-stepper">1</a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step user-info-step">
+                        <a href="./user-info.html" type="button" class="btn btn-default btn-circle"
+                            disabled="disabled" id="user-info-stepper">2</a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step calories-info-step">
+                        <a href="./calories-info.html" type="button" class="btn btn-default btn-circle"
+                            disabled="disabled" id="calories-info-stepper">3</a>
+                        <hr class="steps-separator">
+                    </div>
+                    <div class="steps-step recipes-step">
+                        <a href="./recipes.html" type="button" class="btn btn-default btn-circle"
+                            disabled="disabled" id="recipes-stepper">3</a>
+                        <hr class="w-10">
+                    </div>
 
+                </div>
+            </div>
+        </section>
         <section class="title-page">
             <h1>HEALTH UP</h1>
             <hr class="hr3">
@@ -37,7 +62,6 @@
                 </div>
             </div>
         </section>
-        
     </div>
     <script type="module" src="./index.js"></script>
 </body>

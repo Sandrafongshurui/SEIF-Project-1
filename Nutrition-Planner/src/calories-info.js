@@ -86,7 +86,6 @@ function updateDomBtns() {
 //hide and unhide the 3 different description
 function updateDomDescription() {
     const paraEl = document.getElementsByClassName("article")
-    console.log(paraEl)
     for (let i = 0; i <= paraEl.length - 1; i++) {
         console.log(paraEl[i].className)
         if (paraEl[i].className.includes(" d-block")) {
@@ -96,6 +95,9 @@ function updateDomDescription() {
             paraEl[i].className = paraEl[i].className.replace(" d-none", " d-block")
         }
     }
+
+    document.getElementById("span-goal").innerText = newUserProfile.goal
+    document.getElementById("span-calories").innerText =`${ newUserProfile.goalNutrientsInfo.calories} cal`
 }
 
 function init() {
@@ -110,7 +112,7 @@ function init() {
         goalCalculatedNutrients.goal = newUserProfile.goal
         calculateCaloriesAndNutrients()
         updateDomBtns()
-        updateDomDescription()
+        updateDomDescription()    
         return
     }
 

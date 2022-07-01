@@ -15,23 +15,23 @@ const measureType = {
 
 const nutrientsEquationNums = {
     "weight-loss": {
+        "carbs": 50,
+        "protein": 20,
+        "fats": 30,
+    },
+    "muscle-gain": {
+        "carbs": 50,
+        "protein": 30,
+        "fats": 20,
+    },
+    "tone-up": {
         "carbs": 40,
         "protein": 30,
         "fats": 30,
     },
-    "muscle-gain": {
-        "carbs": 40,
-        "protein": 40,
-        "fats": 20,
-    },
-    "tone-up": {
-        "carbs": 25,
-        "protein": 50,
-        "fats": 25,
-    },
     "maintainence": {
-        "carbs": 40,
-        "protein": 30,
+        "carbs": 50,
+        "protein": 20,
         "fats": 30,
     }
 }
@@ -91,8 +91,8 @@ class UserProfile {
         }
         //tone-up, 
         if (this.goal === "tone-up") {
-            this.goalNutrientsInfo.calories = this.maintainenceNutrientsInfo.calories
-            return Math.round(this.goalNutrientsInfo.calories / 100) * 100
+            this.goalNutrientsInfo.calories = this.maintainenceNutrientsInfo.calories - 300
+            return Math.round(this.goalNutrientsInfo.calories / 100) * 100 
         }
     }
 
