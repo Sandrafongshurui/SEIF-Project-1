@@ -35,11 +35,11 @@ CONTENTS OF THIS FILE
 ---------------------
 Features
 
-1)Usage of local storage, so users do not need to re-fill their information
+1) Usage of local storage, so users do not need to re-fill their information
 
-2)User is able to get personalised calories counts based on thier inputs
+2) User is able to get personalised calories counts based on thier inputs
 
-3)Filter selection of recommended recipes.
+3) Filter selection of recommended recipes.
 
 
 ---------------------
@@ -53,20 +53,21 @@ Challenges
 -As i checked only through the key, if the storage is present, hence it was always present, but the value might be empty.
 
 2) Using the spreader wrongly
+
 -I used a template for different objects, whenever I changed one objects values, all the other objects values
 changed as well.
 -I spend a long time rectifying it as i thought my function was not working correctly, but after seeking help, realised that the spreader only works on one level.
 
 3) Getting the buttons to toggle correctly
 
--The button had a text inside it, and the text was using the <strong> element. I had to troubleshoot to only realised that clicking on the text with the <strong> element is in fact not cliking the target element (button) at all.
+-The button had a text inside it, and the text was using the atrong element. I had to troubleshoot to only realised that clicking on the text with the strong element is in fact not cliking the target element (button) at all.
 -Solving the part if user enters a page, and local storage is present load the storage. Means having to activate the button by focusing, and if user leaves the page without any changes, it means technically the button has not been clicked, so the option is not registered.
 
 4)Working with the API results
 
--As i needed calories for one meal, the results that return were not consistent, some recipes yield more than 1 servings, some more than 10 servings.
--This was making my filtering very narrow for the user, as the this app internally filters out the calories beyond the estimated one meal, so many results were not being displayed
--I added any extra function to check the yield and divide the portions aso i can maximise the results
+-The results that return were not consistent, some recipes yield more than 1 servings, some more than 10 servings.
+-This was making my filtering very narrow for the user, as this app internally filters out the calories beyond the estimated one meal, so many results were not being displayed
+-I added an extra function to check the yield and divide the portions so i can maximise the results
 
 5)Time management
 
@@ -85,14 +86,14 @@ Techniques/Framework
 ---------------------
 Future Features
 
-1)Able to have user login account
+1) Able to have user login account
 
-2)Feature to track their goals and calorie intake
+2) Feature to track their goals and calorie intake
 
-3)Feature to input their ideal weight, calcukatione can be personalised
+3) Feature to input their ideal weight, calcukatione can be personalised
 
-3)More filter selection on recipes (lunch,breakfast,dinner)
+4) More filter selection on recipes (lunch,breakfast,dinner)
 
-4)Feature to change their goal on at different pages, instead of going back to the main
+5) Feature to change their goal on at different pages, instead of going back to the main
 
-4)Incorporate a more balanced wellness, such as some work out sets they can link to, curated to their goals and needs
+6) Incorporate a more balanced wellness, such as some work out sets they can link to, curated to their goals and needs
