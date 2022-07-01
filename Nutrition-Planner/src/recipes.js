@@ -160,14 +160,19 @@ function creatRecipeItem(eachRecipe) {
     const recipeNutrition = document.createElement("p")
     const breakEl = document.createElement("br")
     const carbSpan = document.createElement("span")
+    carbSpan.classList.add("me-1")
     const protSpan = document.createElement("span")
+    protSpan.classList.add("me-1")
     const fatsSpan = document.createElement("span")
+    fatsSpan.classList.add("me-1")
 
     recipeName.innerText = eachRecipe.recipe.label
     recipeLink.href = eachRecipe.recipe.url
-    recipeImg.setAttribute('target', '_blank');
+    recipeLink.setAttribute("target", "blank")
+    //recipeImg.setAttribute("target", "blank")
+    recipeLink.setAttribute("rel", "noopener noreferrer")
     recipeImg.src = eachRecipe.recipe.image
-    recipeNutrition.innerText = "Nutritional content:"
+    // recipeNutrition.innerText = "Nutritional content:"
     carbSpan.innerText = `Carbs:${Math.round(eachRecipe.recipe.totalNutrients.CHOCDF.quantity)}g`
     protSpan.innerText = ` Protein:${Math.round(eachRecipe.recipe.totalNutrients.PROCNT.quantity)}g`
     fatsSpan.innerText = ` Fats:${Math.round(eachRecipe.recipe.totalNutrients.FAT.quantity)}g`
@@ -176,9 +181,10 @@ function creatRecipeItem(eachRecipe) {
     fatsSpan.classList.add("fats-span")
 
     recipeNutrition.append(breakEl, carbSpan, protSpan, fatsSpan)
-    recipeLink.append(recipeImg)
+    recipeLink.append(recipeImg, recipeItemContents)
     recipeItemContents.append(recipeName, recipeNutrition)
-    recipeItem.append(recipeLink, recipeItemContents)
+    recipeItem.append(recipeLink)
+    
 
     return recipeItem
 }
