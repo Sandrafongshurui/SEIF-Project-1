@@ -45,9 +45,7 @@ class UserProfile {
         this.selectedCaloriesInfo = "goalNutrientsInfo"
         this.recipes = []
         this.shownRecipes=[]
-        this.estOneMeal = {
-            
-        }
+        this.estOneMeal = {}
     }
 
     calculateMaintainenceCalories() {

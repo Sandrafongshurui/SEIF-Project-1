@@ -76,6 +76,13 @@ function updateUserInfoDom(userInfo) {
     }
 }
 
+function selectDefaultOption() {
+    //by default sendatary is the the active button
+    const defaultSelected = document.getElementById("option-1")
+    defaultSelected.focus()
+    defaultSelected.click()
+}
+
 function updateHeaderDom(storedGoal) {
     document.getElementById("indicated-goal-header").innerText = storedGoal.toUpperCase()
 }
@@ -99,6 +106,7 @@ function init() {
     if (newUserProfile.hasStorage("goal")) {
         newUserProfile.inputStorage("goal")
         updateHeaderDom(newUserProfile.goal)
+        selectDefaultOption()
         return
     }
 
