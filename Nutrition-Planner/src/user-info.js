@@ -4,18 +4,20 @@ import newUserProfile from "./JavaScript Files/main.js"
 function addEventListeners() {
     let exerciseFreq = ""
     const exerciseFreqOptions = document.getElementById("exercise-freq")
+    
     document.getElementById("exercise-freq").addEventListener('click', (event) => {
         //make buttons "selected looking"
         //remove active form the previous clicked button
-        const btns = exerciseFreqOptions.getElementsByClassName("btn active")
-        if (btns.length > 0) {
-            btns[0].className = btns[0].className.replace(" active", "")
-        }
+       
         if (event.target.type === "button") {
+            const btns = exerciseFreqOptions.getElementsByClassName("btn active")
+            activeBtn(btns)
             exerciseFreq = event.target.id
             event.target.className += " active"
         }
         else if (event.target.parentElement.type === "button") {
+            const btns = exerciseFreqOptions.getElementsByClassName("btn active")
+            activeBtn(btns)
             exerciseFreq = event.target.parentElement.id
             event.target.parentElement.className += " active"
         }
@@ -27,6 +29,12 @@ function addEventListeners() {
         newUserProfile.storeValue("user-info", getUserInputs(exerciseFreq), true)
         newUserProfile.goToPage("./calories-info.html")
     })
+}
+
+function activeBtn(btns){    
+    if (btns.length > 0) {
+        btns[0].className = btns[0].className.replace(" active", "")
+    }
 }
 
 function getUserInputs(exerciseFreqOption) {

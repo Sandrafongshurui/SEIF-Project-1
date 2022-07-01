@@ -11,7 +11,7 @@ function addEventListeners() {
             if (event.target.id !== "no-filter") {
                 applyDietFilter(event.target.innerText)
             } else {
-                const recipeArray = newUserProfile.recipes
+                const recipeArray = newUserProfile.shownRecipes
                 createReceipeGrid(recipeArray)
             }
         }
@@ -20,13 +20,15 @@ function addEventListeners() {
 
 //Paremeter is the innertext of the dropdown list
 function applyDietFilter(appliedFilter) {
-    //get from the stored list
-    const recipeArray = newUserProfile.recipes
+    //get shown recipes from the stored list
+    const recipeArray = newUserProfile.shownRecipes
     //filter out the appliedFilter List
     const appliedFilterRecipes = recipeArray.filter(eachRecipe => checkRecipeLabels(eachRecipe, appliedFilter))
-    console.log(appliedFilterRecipes)
+    if(appliedFilterRecipes.length === 0){
+        //append a message
+        noResultsMsg()
+    }
     createReceipeGrid(appliedFilterRecipes)
-    //displayInGrid(appliedFilterRecipes)
     return
 }
 
@@ -35,7 +37,6 @@ function checkRecipeLabels(eachRecipe, appliedFilter) {
     //get the array of the health labels
     const recpieHealthLabels = eachRecipe.recipe.healthLabels
     if (recpieHealthLabels.includes(appliedFilter)) {
-        console.log(eachRecipe.recipe.label)
         return eachRecipe
     }
 }
@@ -47,13 +48,25 @@ async function fetchDataAsync(url, options) {
     const recipeArray = data.hits
     //some recipes has more than 1 yields, so need to divide to get more accurate results
     checkYield(recipeArray)
-    //filter more base on calories count
-    const filteredCaloriesRecipes = recipeArray.filter(checkCals)
-    //filter more base on nutrients
-    const filteredNutrientsRecipes = filteredCaloriesRecipes.filter(checkNutrients)
-    //store in local after it fetch, internal filter base on users calories
-    newUserProfile.storeValue("recipes", filteredNutrientsRecipes, true)
-    createReceipeGrid(filteredNutrientsRecipes)
+    //store in local after it fetch
+    newUserProfile.storeValue("recipes", recipeArray, true)
+    filterByCalories(recipeArray)
+   
+}
+
+function filterByCalories(recipeArray){
+ //filter more base on calories count
+ const filteredCaloriesRecipes = recipeArray.filter(checkCals)
+ filterByNutrients(filteredCaloriesRecipes)
+ 
+}
+
+function filterByNutrients(recipeArray){
+//filter more base on nutrients
+ const filteredNutrientsRecipes = recipeArray.filter(checkNutrients)
+ //store as shown recepies
+ newUserProfile.storeValue("shownRecipes", filteredNutrientsRecipes, true)
+ createReceipeGrid(filteredNutrientsRecipes)
 }
 
 function checkYield(recipeArray){
@@ -76,7 +89,6 @@ function checkCals(eachRecipe) {
     //get the selected Calories Info, the calories counts
     const usersCalories = newUserProfile[newUserProfile.selectedCaloriesInfo].calories
     const estOneMealCalories = usersCalories / 3
-    inputPersonalisedTable(estOneMealCalories, 0, 0, 0)
     if (islessThan(recipeCalories, estOneMealCalories)) {
         console.log("suitable calories")
         return eachRecipe
@@ -101,7 +113,9 @@ function checkNutrients(eachRecipe) {
     const estOneMealProtein = usersProtein / 3
     const estOneMealCarbs = usersCarbs / 3
     const estOneMealFats = usersFats / 3
-    inputPersonalisedTable(estOneMealCalories, estOneMealProtein, estOneMealCarbs,  estOneMealFats)
+
+    calulateOneMealNutrients(estOneMealCalories, estOneMealCarbs, estOneMealProtein, estOneMealFats)
+
     //check that the recipe suits the user's nutritional needs
     if (islessThan(recipeProtein, estOneMealProtein) && islessThan(recipeCarbs, estOneMealCarbs) && islessThan(recipeFats, estOneMealFats)) {
         console.log("suitable nutrients")
@@ -113,6 +127,17 @@ function checkNutrients(eachRecipe) {
 
 function islessThan(count, controlCount) {
     return count <= controlCount ? true : false
+}
+
+function noResultsMsg(){
+    const recipeRow1 = document.getElementById("recipe-row-1")
+    const errorMessage = document.createElement("p")
+    errorMessage.classList.add("h3", "mt-5")
+    errorMessage.innerHTML += "Sorry we are unable to get any results base on your currrent filter"
+    errorMessage.innerHTML += "<br>"
+    errorMessage.innerHTML += "Please try another filter or change your previous information!"
+
+    recipeRow1.append(errorMessage)
 }
 
 function createReceipeGrid(recipesArray) {
@@ -158,11 +183,23 @@ function creatRecipeItem(eachRecipe) {
     return recipeItem
 }
 
-function inputPersonalisedTable(cals, carbs, protein, fats){
-  document.getElementById("calories").innerText = `${Math.round(cals)} cal`
-  document.getElementById("carbs-in-grams").innerText = `${Math.round(carbs)} g`
-  document.getElementById("prot-in-grams").innerText = `${Math.round(protein)} g`
-  document.getElementById("fats-in-grams").innerText = `${Math.round(fats)} g`
+function calulateOneMealNutrients(cals, carbs, protein, fats){
+    const estOneMeal = {}
+    estOneMeal.calories = cals
+    estOneMeal.carbs = carbs
+    estOneMeal.protein = protein
+    estOneMeal.fats = fats
+    newUserProfile.storeValue("estOneMeal", estOneMeal, true)
+
+    inputPersonalisedTable()
+}
+
+function inputPersonalisedTable(){
+  const estOneMealItem = newUserProfile.estOneMeal
+  document.getElementById("calories").innerText = `${Math.round(estOneMealItem.calories)} cal`
+  document.getElementById("carbs-in-grams").innerText = `${Math.round(estOneMealItem.carbs)} g`
+  document.getElementById("prot-in-grams").innerText = `${Math.round(estOneMealItem.protein)} g`
+  document.getElementById("fats-in-grams").innerText = `${Math.round(estOneMealItem.fats)} g`
 }
 
 function init() {
@@ -185,15 +222,17 @@ function init() {
         newUserProfile.inputStorage("user-info")
        
 
-        //sometimes i get the 403 forbidden error when i get the recipes from my local storage
-        //hide the loader-spinner, this only works for on awake
+        // //sometimes i get the 403 forbidden error when i get the recipes from my local storage
+        // console.log("get from st")
+        // //hide the loader-spinner, this only works for on awake
         // document.getElementById("loader-spinner-sect").style.display = "none"
         // document.getElementById("recipes-sect").style.display = "block"
-        //get recipes from userprofile
-        //const recipeArray = newUserProfile.recipes
-        //createReceipeGrid(recipeArray)
-
-        fetchDataAsync("https://edamam-recipe-search.p.rapidapi.com/search?q=dinner&from=0&to=100", options)
+        // //get recipes from userprofile
+        // const recipeArray = newUserProfile.recipes
+        // filterByCalories(recipeArray)
+       
+        fetchDataAsync("https://edamam-recipe-search.p.rapidapi.com/search?q=supper&from=0&to=100", options)
+        
         return
     }
 
@@ -204,9 +243,9 @@ function init() {
         newUserProfile.inputStorage("maintainence-nutrients-info")
         newUserProfile.inputStorage("goal")
         newUserProfile.inputStorage("user-info")
-        ewUserProfile.inputStorage("user-info")
-        inputPersonalisedTable()
-        fetchDataAsync("https://edamam-recipe-search.p.rapidapi.com/search?q=lunch&from=0&to=100", options)
+        newUserProfile.inputStorage("user-info")
+
+        fetchDataAsync("https://edamam-recipe-search.p.rapidapi.com/search?q=supper&from=0&to=100", options)
         return
     }
 

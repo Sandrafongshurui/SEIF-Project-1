@@ -1,5 +1,5 @@
 .steps-separator {
-  width: 110px;
+  width: 62px;
   border: 0;
   height: 3px;
   margin: 0;
@@ -39,11 +39,9 @@
 .steps-form .steps-row {
   top: 14px;
   bottom: 0;
-  /* position: absolute; */
   content: " ";
   width: 100%;
   height: 1px;
-  /* background-color: #ccc; } */
 }
 
 .steps-form .steps-row .steps-step {
@@ -54,17 +52,9 @@
 
 .steps-form .steps-row .steps-step p {
   margin-bottom: 0;
-  /* margin: 0; */
   font-size: small;
-  /* position: absolute; */
   margin-top: 0.5em;
 }
-
-
-/* a[disabled="disabled"] {
-  pointer-events: none;
-  background-color: red;
-} */
 
 .steps-form .steps-row .steps-step .btn-circle {
 
@@ -88,7 +78,7 @@
 
 
 .steps-container {
-  width: 500px;
+  width: 381px;
   margin: 0 auto;
 
 }
@@ -129,41 +119,14 @@
 
 }
 
-/* .btn:hover {
-  background-color: #e7f2fd;
-} */
-
 h2 {
   font-family: 'Passion One', cursive;
   font-size: 40px;
-  /* font-family: 'Poiret One', cursive; */
-  /* font-family: 'Paytone One', sans-serif; */
   color: #767676;
 }
 
-/* .loader-spinner-sect{
-  display: inline-block;
-}
-
-.recipes-sect{
-  display: none;
-} */
 article {
   font-size: 15px;
-}
-
-@media screen and (max-width: 480px) {
-  article {
-    font-size: small;
-  }
-
-  h2 {
-    font-size: 30px;
-  }
-
-  .selection-sect .btn {
-    margin-bottom: 0.5em;
-  }
 }
 
 h1 {
@@ -184,8 +147,6 @@ h3:not(.title-page h3) {
   font-weight: bold;
 }
 
-
-
 label,
 .recipe-item-contents p {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -205,10 +166,9 @@ label,
   box-sizing: content-box;
 }
 
-/* .calories-requirements .btn{
-  width: 14em;
-  height: 5em;
-} */
+.calories-requirements h4 {
+  font-size: 45px;
+}
 
 input {
   border-radius: 7px;
@@ -219,7 +179,6 @@ input {
 input:not(.gender-select input) {
   width: 12em;
 }
-
 
 .recipe-item {
   border: rgba(102, 102, 102, 0.329) solid;
@@ -235,15 +194,20 @@ input:not(.gender-select input) {
 }
 
 .recipe-page .nutrient-table {
-  width: 487px;
-  height: 60px;
+  width: 327px;
+  height: 41px;
   border: none;
 }
 
-.recipe-page .diet-sect p {
+.table-caption {
   text-align: left;
   font-style: italic;
   font-size: small;
+}
+
+.recipe-description p {
+  width: 60%;
+  margin: 1em auto;
 }
 
 .description-sect span {
@@ -251,31 +215,39 @@ input:not(.gender-select input) {
   color: #0281ff;
 }
 
-.hr3 {
-  width: 510px;
+.hrblue {
+  width: 40%;
   margin: 1em auto;
   border: 0;
   height: 2px;
-  background-image: linear-gradient(to right, transparent, #0281ff, transparent);
+  background-image: linear-gradient(to right, #00e0ff59, #1c84e5, #00ff6d29);
+  opacity: 1;
+}
+
+.recipe-page .hrblue {
+  width: 60%;
 }
 
 .title-page div {
-
   max-width: 31.5em;
-  /* text-align: center; */
   margin: 1em auto;
 
+}
+
+.table-border {
+  border: #6c757d36 solid;
+  border-radius: 8px;
+  padding: 0.4em;
 }
 
 .diet-sect {
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 1em;
 }
 
 .main .description-sect {
-  /* width: 200px; */
   max-width: 584px;
-  /* text-align: center; */
   margin: 0 auto;
 }
 
@@ -326,4 +298,41 @@ input:not(.gender-select input) {
   100% {
     transform: rotate(360deg);
   }
+}
+
+@media screen and (max-width: 480px) {
+  article {
+    font-size: small;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .selection-sect .btn {
+    margin-bottom: 0.5em;
+  }
+
+  .recipe-description p {
+    width: 90%;
+  }
+
+  .recipe-page .nutrient-table {
+    width: 336px;
+  }
+
+  .goal-selection-sect .btn,
+  .footer-sect .btn {
+    width: 19em;
+  }
+
+  body {
+    font-size: small;
+  }
+
+  .hrblue {
+    width: 100%;
+
+  }
+
 }

@@ -44,25 +44,26 @@
       </div>
     </section>
     <section class="title-page">
-      <div class="border-bottom">
+      <div>
         <h2>
           Recommended Recipes:
         </h2>
       </div>
     </section>
-    <section id="loader-spinner-sect" style="display: inline-block;">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <hr class="hrblue">
+    <section>
+      <div class="recipe-description">
+        <p class="mt-3">
+          A healthy lifestyle is not base on caloric intake, both <strong>diet and exercise</strong> are pertinent when
+          it comes to your health goals!
+          Base on your provided information we have curated a list of recipes that will assist you to reach your
+          goal!<br>
+          <strong>Results are customized to your estimaed nutrients breakdwon per meal!</strong>
+        </p>
       </div>
-      <p>Loading recipes...</p>
-    </section>
-    <section id="recipes-sect" style="display: none;">
-      <section id="diet-filter" class="diet-filter-dropdown diet-sect">
-        <div>
-          <p class="text-left">Estimated per meal nutrients breakdwon</p>
+      <section id="diet-filter" class="diet-filter-dropdown diet-sect flex-wrap">
+        <div class="table-border">
+          <p class="table-caption">Your estimated nutrients breakdown per meal </p>
           <div class="row justify-content-center nutrient-table">
             <div class="row">
               <div class="d-inline-flex border-bottom justify-content-center" id="nutrient-table-title">
@@ -72,10 +73,10 @@
                 <div class="col-4" id="fats-in-per">Fats</div>
               </div>
               <div class="d-inline-flex border-bottom justify-content-center" id="nutrient-table-cal">
-                <div class="col-4" id="calories">Carbs</div>
-                <div class="col-4" id="carbs-in-grams">Carbs</div>
-                <div class="col-4" id="prot-in-grams">Protein</div>
-                <div class="col-4" id="fats-in-grams">Fats</div>
+                <div class="col-4" id="calories">0 cal</div>
+                <div class="col-4" id="carbs-in-grams">0 g</div>
+                <div class="col-4" id="prot-in-grams">0 g</div>
+                <div class="col-4" id="fats-in-grams">0 g</div>
               </div>
             </div>
           </div>
@@ -92,22 +93,20 @@
             <li id="no-filter" class="dropdown-item">No Filter</li>
           </ul>
         </div>
-        
+
       </section>
-      <div>
-        <p class="mt-3">
-          A healthy lifestyle is not base on caloric intake, both <strong>diet and exercise</strong> are pertinent when
-          it comes to your health goals!
-        </p>
-        <p>
-          Base on your provided information we have curated a list of recipes that will assist you to reach your
-          goal!<br>
-          Results are customized to your recommeded caloric and nutrients intake!
-        </p>
 
-      </div>
+      <section id="loader-spinner-sect" style="display: inline-block;">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <p>Loading recipes...</p>
+      </section>
 
-      <section class="recipe-container-grid">
+      <section class="recipe-container-grid" id="recipes-sect" style="display: none;">
         <div class="container text-center">
           <div class="row d-inline-flex flex-wrap justify-content-center" id="recipes-container">
             <div id="recipe-row-1">

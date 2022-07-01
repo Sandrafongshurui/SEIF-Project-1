@@ -44,6 +44,10 @@ class UserProfile {
         this.maintainenceNutrientsInfo = {}
         this.selectedCaloriesInfo = "goalNutrientsInfo"
         this.recipes = []
+        this.shownRecipes=[]
+        this.estOneMeal = {
+            
+        }
     }
 
     calculateMaintainenceCalories() {
@@ -129,6 +133,14 @@ class UserProfile {
         }
         if (pageData === "recipes") {
             this.recipes = value
+            return
+        }
+        if (pageData === "estOneMeal") {
+            this.estOneMeal = value
+            return
+        }
+        if (pageData === "shownRecipes") {
+            this.shownRecipes = value
             return
         }
     }
