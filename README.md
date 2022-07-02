@@ -48,34 +48,13 @@ Features
 Challenges
 1) Using local storage properly, if user does not follow the intended flow, how will the information show?
 
--It was challeneging because of the nature of this application, each page needs the previous pages informaation and not every page works the same.
--Index-page, user-info page, on click goes to the next page and stores in local at the same time.
--Calories-page only can happen because of the user's input in the user-info page. So the storing of this page, needs to be done either on entering,or done before leaving the previous page. 
--This caused some challenges for me as i did'nt understand why some information were empty as i toggled between the pages randomly. 
--As i checked only through the key, if the storage is present, hence it was always present, but the value might be empty.
+2) Getting the buttons to toggle correctly
 
-2) Using the spreader wrongly
+3) Working with the API results
 
--I used a template for different objects, whenever I changed one objects values, all the other objects values
-changed as well.
--I spend a long time rectifying it as i thought my function was not working correctly, but after seeking help, realised that the spreader only works on one level.
+4) Time management
 
-3) Getting the buttons to toggle correctly
-
--The button had a text inside it, and the text was using the atrong element. I had to troubleshoot to only realised that clicking on the text with the strong element is in fact not cliking the target element (button) at all.
--Solving the part if user enters a page, and local storage is present load the storage. Means having to activate the button by focusing, and if user leaves the page without any changes, it means technically the button has not been clicked, so the option is not registered.
-
-4) Working with the API results
-
--The results that return were not consistent, some recipes yield more than 1 servings, some more than 10 servings.
--This was making my filtering very narrow for the user, as this app internally filters out the calories beyond the estimated one meal, so many results were not being displayed
--I added an extra function to check the yield and divide the portions so i can maximise the results
-
-5) Time management
-
--Spent alot of time thinking about how and the best way to do it, as many instances I have done a certain function, only to realised i could hv done it in a faster way. Hence i spent more time thinking stuff through.
-
-6) Local storage problem to retrivinng recipes, 403 forbidden error occurs randomly.
+5) Local storage problem to retrivinng recipes, 403 forbidden error occurs randomly.
 
 ---------------------
 Techniques/Framework
@@ -101,4 +80,3 @@ Future Features
 
 5) Feature to change their goal on at different pages, instead of going back to the main
 
-6) Incorporate a more balanced wellness, such as some work out sets they can link to, curated to their goals and needs
