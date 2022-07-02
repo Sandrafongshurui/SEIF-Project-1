@@ -41,6 +41,8 @@ Features
 
 3) Filter selection of recommended recipes.
 
+4) Mobile resposive
+
 
 ---------------------
 Challenges
@@ -73,7 +75,7 @@ changed as well.
 
 -Spent alot of time thinking about how and the best way to do it, as many instances I have done a certain function, only to realised i could hv done it in a faster way. Hence i spent more time thinking stuff through.
 
-6) Local storage problem to retrivinng recipes, 403 forbidden error.
+6) Local storage problem to retrivinng recipes, 403 forbidden error occurs randomly.
 
 ---------------------
 Techniques/Framework
